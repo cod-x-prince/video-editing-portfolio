@@ -1,4 +1,4 @@
-import { db } from "../utils/db.ts";
+import { db } from "../utils/db";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {

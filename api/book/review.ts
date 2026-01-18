@@ -1,5 +1,5 @@
-import { db } from "../utils/db.ts";
-import { calendar } from "../utils/calendar.ts";
+import { db } from "../utils/db";
+import { calendar } from "../utils/calendar";
 
 export default async function handler(req: any, res: any) {
   // Simple "Admin Token" auth (query param or header)
