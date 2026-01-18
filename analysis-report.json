@@ -1,0 +1,218 @@
+{
+  "timestamp": "2026-01-18T09:36:01.445Z",
+  "files": {
+    "total": 26,
+    "byType": {
+      ".local": 1,
+      "": 1,
+      ".json": 5,
+      ".ts": 5,
+      ".tsx": 7,
+      ".html": 1,
+      ".mp4": 2,
+      ".mov": 2,
+      ".md": 1,
+      ".js": 1
+    }
+  },
+  "security": {
+    "secretsFound": [
+      {
+        "file": ".env.local",
+        "line": 1,
+        "type": "Generic API Key",
+        "snippet": "GEMINI_API_KEY=PLACEHOLDER_API_KEY..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 24,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"GEMINI_API_KEY=PLACEHOLDER_API_KEY...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 36,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"2. Set the `GEMINI_API_KEY` in [.env.l..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 78,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"'process.env.API_KEY': JSON.stringify(..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 84,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"'process.env.GEMINI_API_KEY': JSON.str..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 19,
+        "type": "Generic Secret",
+        "snippet": "\"secretsFound\": [..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 29,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 30,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"secretAccessKey: process.env.AWS_SECRE..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 41,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 42,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"secretsFound: [],...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 47,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 48,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"// 1. File Stats & Secret Scanning...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 53,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 54,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"const SECRET_PATTERNS = [...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 59,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 60,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"{ name: \\\"Generic Secret\\\", pattern: /..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 65,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 66,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"SECRET_PATTERNS.forEach(({ name, patte..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 71,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 72,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"report.security.secretsFound.push({......"
+      },
+      {
+        "file": "api\\presign.ts",
+        "line": 9,
+        "type": "Generic Secret",
+        "snippet": "secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY..."
+      },
+      {
+        "file": "README.md",
+        "line": 18,
+        "type": "Generic API Key",
+        "snippet": "2. Set the `GEMINI_API_KEY` in [.env.local](.env.l..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 17,
+        "type": "Generic Secret",
+        "snippet": "secretsFound: [],..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 51,
+        "type": "Generic Secret",
+        "snippet": "// 1. File Stats & Secret Scanning..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 53,
+        "type": "Generic Secret",
+        "snippet": "const SECRET_PATTERNS = [..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 55,
+        "type": "Generic Secret",
+        "snippet": "{ name: \"Generic Secret\", pattern: /secret/i },..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 67,
+        "type": "Generic Secret",
+        "snippet": "SECRET_PATTERNS.forEach(({ name, pattern }) => {..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 75,
+        "type": "Generic Secret",
+        "snippet": "report.security.secretsFound.push({..."
+      },
+      {
+        "file": "vite.config.ts",
+        "line": 14,
+        "type": "Generic API Key",
+        "snippet": "// 'process.env.API_KEY': JSON.stringify(env.GEMIN..."
+      },
+      {
+        "file": "vite.config.ts",
+        "line": 15,
+        "type": "Generic API Key",
+        "snippet": "// 'process.env.GEMINI_API_KEY': JSON.stringify(en..."
+      }
+    ],
+    "envIssues": []
+  },
+  "typeCheck": {
+    "passed": true,
+    "output": "Passed"
+  },
+  "dependencies": {
+    "vulnerabilities": 0,
+    "summary": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  }
+}

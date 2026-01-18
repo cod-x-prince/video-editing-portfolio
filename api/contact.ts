@@ -85,13 +85,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: process.env.OWNER_EMAIL as string,
       replyTo: fromEmail,
-      subject: `Portfolio Inquiry: ${subject}`,
+      subject: `[Addictive Edits] New Project Inquiry: ${subject}`,
       html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.4">
-          <h3>New Contact</h3>
-          <p><strong>From:</strong> ${fromEmail}</p>
+        <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
+          <h2 style="color: #000;">New Project Inquiry</h2>
+          <hr style="border: 0; border-top: 1px solid #ccc;" />
+          <p><strong>Name/Email:</strong> ${fromEmail}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
           <p><strong>Message:</strong></p>
-          <pre>${String(message).replace(/</g, "&lt;")}</pre>
+          <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #eee;">
+            ${String(message).replace(/</g, "&lt;")}
+          </div>
+          <p style="font-size: 12px; color: #888; margin-top: 20px;">
+            Sent from Addictive Edits Portfolio at ${new Date().toISOString()}
+          </p>
         </div>
       `,
     });
