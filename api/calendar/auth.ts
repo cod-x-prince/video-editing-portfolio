@@ -1,18 +1,34 @@
+// api/calendar/auth.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { google } from "googleapis";
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
+  const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI } =
+    process.env;
+
+  // Hard validation — fail early and clearly
+  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !GOOGLE_REDIRECT_URI) {
+    return res.status(500).json({
+      error: "Missing required Google OAuth environment variables",
+      required: [
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "GOOGLE_REDIRECT_URI",
+      ],
+    });
+  }
+
   const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    "http://localhost:3000/api/calendar/callback",
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    GOOGLE_REDIRECT_URI,
   );
 
   const authUrl = oauth2Client.generateAuthUrl({
-    access_type: "offline",
+    access_type: "offline", // required for refresh token
     scope: ["https://www.googleapis.com/auth/calendar"],
-    prompt: "consent",
+    prompt: "consent", // ensures refresh token is issued
   });
 
-  res.redirect(authUrl);
+  return res.redirect(authUrl);
 }
