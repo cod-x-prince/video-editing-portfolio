@@ -1,7 +1,5 @@
-import fs from "fs";
-import path from "path";
-
-const DATA_PATH = path.join(process.cwd(), "data", "bookings.json");
+// File system writes are not supported in Vercel serverless functions (Read-only OS).
+// We rely on Google Calendar and Email for data persistence.
 
 /**
  * @param {Object} booking
@@ -14,39 +12,9 @@ const DATA_PATH = path.join(process.cwd(), "data", "bookings.json");
  * @param {any} [booking.other]
  */
 export function saveBooking(booking) {
-  fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
-
-  let existing = [];
-  if (fs.existsSync(DATA_PATH)) {
-    existing = JSON.parse(fs.readFileSync(DATA_PATH, "utf-8"));
-  }
-
-  existing.push({
-    ...booking,
-    createdAt: new Date().toISOString(),
-  });
-
-  fs.writeFileSync(DATA_PATH, JSON.stringify(existing, null, 2));
+  console.log("📩 Booking processed (Stateless):", booking);
+  return booking;
 }
 
-export const db = {
-  getAll: () => {
-    if (fs.existsSync(DATA_PATH)) {
-      return JSON.parse(fs.readFileSync(DATA_PATH, "utf-8"));
-    }
-    return [];
-  },
-  updateStatus: (id, status) => {
-    if (!fs.existsSync(DATA_PATH)) return null;
-    const bookings = JSON.parse(fs.readFileSync(DATA_PATH, "utf-8"));
-    // Match by id (if present) or fallback (this is simplified as logic wasn't fully defined)
-    const index = bookings.findIndex((b) => b.id === id || b.email === id);
-    if (index === -1) return null;
-
-    bookings[index].status = status;
-    bookings[index].updatedAt = new Date().toISOString();
-
-    fs.writeFileSync(DATA_PATH, JSON.stringify(bookings, null, 2));
-    return bookings[index];
-  },
-};
+// Local DB is disabled in production/serverless environment.
+export const db = null;
