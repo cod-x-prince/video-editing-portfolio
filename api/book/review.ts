@@ -1,5 +1,5 @@
-import { db } from "../utils/db";
-import { calendar } from "../utils/calendar";
+import { db } from "../utils/db.js";
+import { calendar } from "../utils/calendar.js";
 
 export default async function handler(req: any, res: any) {
   // Simple "Admin Token" auth (query param or header)

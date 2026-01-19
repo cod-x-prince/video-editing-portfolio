@@ -1,12 +1,13 @@
-import { Booking } from "./db";
-
 // Note: To enable real Google Calendar integration:
 // 1. Run: npm install googleapis
 // 2. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URI in .env
 // 3. Implement the full OAuth flow (requires a separate auth route).
 
 export const calendar = {
-  createEvent: async (booking: Booking): Promise<boolean> => {
+  /**
+   * @param {Object} booking
+   */
+  createEvent: async (booking) => {
     // Check for credentials
     if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
       console.log(
