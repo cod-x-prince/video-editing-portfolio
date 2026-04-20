@@ -30,19 +30,21 @@ export const CustomCursor: React.FC = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      let newState: 'default' | 'hover_link' | 'hover_video' = 'default';
+      
       if (target.closest('a') || target.closest('button')) {
-        setCursorState('hover_link');
+        newState = 'hover_link';
       } else if (target.closest('[data-cursor="video"]')) {
-        setCursorState('hover_video');
-      } else {
-        setCursorState('default');
+        newState = 'hover_video';
       }
+      
+      setCursorState((prev) => (prev !== newState ? newState : prev));
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
     return () => {
       document.body.classList.remove('hide-cursor');
@@ -62,6 +64,8 @@ export const CustomCursor: React.FC = () => {
         y: springY,
         width: 48,
         height: 48,
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden"
       }}
       initial={{ opacity: 0 }}
       animate={{ 
@@ -69,7 +73,7 @@ export const CustomCursor: React.FC = () => {
         scale: cursorState === 'hover_link' ? 1.8 : cursorState === 'hover_video' ? 2.2 : 1,
       }}
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
-      className="pointer-events-none fixed top-0 left-0 z-9999 flex items-center justify-center rounded-full bg-[#d97706] mix-blend-multiply will-change-transform"
+      className="pointer-events-none fixed top-0 left-0 z-9999 flex items-center justify-center rounded-full bg-[#d97706] mix-blend-multiply transform-gpu will-change-transform"
     >
       {cursorState === 'hover_video' && (
         <motion.span 
