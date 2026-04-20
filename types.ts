@@ -15,9 +15,11 @@ export interface Reel {
   title: string;
   client: string;
   videoUrl: string;
-  posterUrl: string;
+  posterUrl?: string;
   duration: string;
   tags: string[];
+  niche?: string;
+  description?: string;
 }
 
 export interface ProcessStep {

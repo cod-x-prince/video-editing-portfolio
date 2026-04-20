@@ -5,12 +5,8 @@ export interface Booking {
   name?: string;
   notes?: string;
   calendarEventId?: string;
-  status?: string;
+  [key: string]: unknown;
 }
 
-export function saveBooking(booking: Booking): void;
-
-export const db: {
-  getAll(): Booking[];
-  updateStatus(id: string, status: string): Booking | null;
-};
+export function saveBooking(booking: Booking): Booking;
+export const db: null;

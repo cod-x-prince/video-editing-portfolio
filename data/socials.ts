@@ -8,25 +8,19 @@ export interface SocialLink {
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: "Instagram",
-    url: "https://instagram.com",
+    url: "https://www.instagram.com/edit_x_parmbeer?igsh=MTMxNHN6ejEwdmN0bg==",
     icon: "Instagram",
     isValid: true,
   },
   {
     platform: "LinkedIn",
-    url: "https://linkedin.com",
+    url: "https://www.linkedin.com/in/parmbeer-singh-672b62279?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     icon: "Linkedin",
     isValid: true,
   },
   {
-    platform: "YouTube",
-    url: "https://youtube.com",
-    icon: "Youtube",
-    isValid: true,
-  },
-  {
     platform: "Twitter",
-    url: "https://twitter.com",
+    url: "https://x.com/madeby_parmbeer",
     icon: "Twitter",
     isValid: true,
   },

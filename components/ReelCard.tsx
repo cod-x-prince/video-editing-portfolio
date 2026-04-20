@@ -1,7 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Reel } from '../types';
-import { Volume2, VolumeX, Play } from 'lucide-react';
 
 interface ReelCardProps {
   reel: Reel;
@@ -10,39 +9,36 @@ interface ReelCardProps {
 
 export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const handleInteraction = async () => {
     if (videoRef.current) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Auto-play was prevented
-        });
+      try {
+        videoRef.current.muted = false; // play with sound as requested
+        await videoRef.current.play();
+        setIsPlaying(true);
+      } catch (err) {
+        // Browser prevented unmuted autoplay, fallback to muted autoplay
+        console.warn("Unmuted autoplay prevented. Falling back to muted.");
+        if (videoRef.current) {
+          try {
+            videoRef.current.muted = true;
+            await videoRef.current.play();
+            setIsPlaying(true);
+          } catch (fallbackErr) {
+            console.error("Autoplay completely prevented.");
+          }
+        }
       }
-      setIsPlaying(true);
     }
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
+  const stopInteraction = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       setIsPlaying(false);
-      videoRef.current.currentTime = 0; // Reset for loop feel
-    }
-  };
-
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      // Toggle logic
-      const nextMutedState = !videoRef.current.muted;
-      videoRef.current.muted = nextMutedState;
-      setIsMuted(nextMutedState);
+      videoRef.current.currentTime = 0; 
     }
   };
 
@@ -52,57 +48,57 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative aspect-[9/16] rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800 cursor-pointer"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className={`group relative aspect-9/16 rounded-xl overflow-hidden bg-[#e4e2dc] border border-[#e4e2dc] cursor-pointer`}
+      onMouseEnter={handleInteraction}
+      onMouseLeave={stopInteraction}
+      onClick={handleInteraction} /* mobile support */
+      data-cursor="video"
     >
-      {/* Video Element */}
       <video
         ref={videoRef}
-        src={reel.videoUrl}
+        src={`${reel.videoUrl}#t=0.001`}
         poster={reel.posterUrl}
-        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-105"
+        preload="metadata"
+        className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         loop
-        muted={isMuted}
         playsInline
+        onLoadedData={() => setIsLoaded(true)}
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+      {/* Loading pulse before video loads */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-[#e4e2dc] animate-pulse" />
+      )}
 
-      {/* Play Icon (Initial State) */}
-      {!isPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-            <Play fill="white" className="w-4 h-4 text-white ml-1" />
-          </div>
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+      
+      {/* Persistent Niche Badge */}
+      {reel.niche && (
+        <div className="absolute bottom-4 left-4 z-10">
+          <span className="bg-[#d97706] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+            {reel.niche}
+          </span>
         </div>
       )}
 
-      {/* Metadata (Bottom) */}
-      <div className="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-        <div className="flex justify-between items-end">
-          <div>
-             <div className="flex gap-2 mb-1">
-                {reel.tags.map(tag => (
-                  <span key={tag} className="text-[9px] uppercase tracking-wider text-orange-400 font-bold">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            <h4 className="text-white font-syne font-bold text-lg leading-tight">{reel.title}</h4>
-            <p className="text-neutral-400 text-xs font-inter">{reel.client}</p>
-          </div>
-          
-          <button 
-            onClick={toggleMute}
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md transition-colors text-white opacity-0 group-hover:opacity-100"
-            aria-label={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-          </button>
+      {/* [FIX #6] Description overlay on hover */}
+      {reel.description && (
+        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none pb-12">
+          <p className="text-white text-sm mt-1 leading-relaxed">
+            {reel.description}
+          </p>
         </div>
-      </div>
+      )}
+
+      {!isPlaying && isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v14l11-7L8 5z"/>
+            </svg>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };
