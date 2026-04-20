@@ -21,11 +21,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
 
       - name: Install Dependencies
         run: |
-          rm -f package-lock.json
+          rm -rf package-lock.json node_modules
           npm install
 
       - name: Run Analysis (Lint/Types/Security)
