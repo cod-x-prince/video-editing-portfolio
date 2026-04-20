@@ -24,7 +24,9 @@ jobs:
           cache: "npm"
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          rm -f package-lock.json
+          npm install
 
       - name: Run Analysis (Lint/Types/Security)
         run: npm run analyze
