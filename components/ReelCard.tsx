@@ -75,7 +75,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       {/* Persistent Niche Badge */}
       {reel.niche && (
         <div className="absolute bottom-4 left-4 z-10">
-          <span className="bg-[#d97706] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+          <span className="bg-[#d97706] text-[#18181b] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
             {reel.niche}
           </span>
         </div>
