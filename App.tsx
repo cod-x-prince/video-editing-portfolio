@@ -141,6 +141,7 @@ const App: React.FC = () => {
           onClose={() => setIsBookingOpen(false)}
         />
 
+        <main id="main-content">
         {/* HERO SECTION */}
         <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
           <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch min-h-[400px] md:min-h-[500px]">
@@ -201,7 +202,7 @@ const App: React.FC = () => {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#a1a1aa]"
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#71717a]"
           >
             <span className="text-[10px] tracking-[0.2em] font-medium uppercase font-syne">
               Scroll
@@ -286,7 +287,7 @@ const App: React.FC = () => {
                 tell me what you're building.
               </p>
               {/* [FIX #7] One honest stat — not testimonials */}
-              <p className="text-xs uppercase tracking-[0.15em] text-[#71717a] mb-12">50+ reels delivered across 6 niches</p>
+              <p className="text-xs uppercase tracking-[0.15em] text-[#a1a1aa] mb-12">50+ reels delivered across 6 niches</p>
 
               <div className="flex flex-col items-center justify-center">
                 <button
@@ -299,6 +300,7 @@ const App: React.FC = () => {
             </motion.div>
           </div>
         </section>
+        </main>
 
         <Footer />
       </div>

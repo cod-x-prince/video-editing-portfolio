@@ -6,9 +6,9 @@ export const CustomCursor: React.FC = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth the mouse values based on JSON spec
-  const springX = useSpring(mouseX, { stiffness: 400, damping: 28 });
-  const springY = useSpring(mouseY, { stiffness: 400, damping: 28 });
+  // Smooth the mouse values with lower stiffness and slightly higher damping to eliminate jitter
+  const springX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.1 });
+  const springY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.1 });
 
   const [cursorState, setCursorState] = useState<'default' | 'hover_link' | 'hover_video'>('default');
   const [isVisible, setIsVisible] = useState(false);
@@ -68,8 +68,8 @@ export const CustomCursor: React.FC = () => {
         opacity: isVisible ? 1 : 0,
         scale: cursorState === 'hover_link' ? 1.8 : cursorState === 'hover_video' ? 2.2 : 1,
       }}
-      transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-      className="pointer-events-none fixed top-0 left-0 z-9999 flex items-center justify-center rounded-full bg-[#d97706] mix-blend-multiply"
+      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
+      className="pointer-events-none fixed top-0 left-0 z-9999 flex items-center justify-center rounded-full bg-[#d97706] mix-blend-multiply will-change-transform"
     >
       {cursorState === 'hover_video' && (
         <motion.span 

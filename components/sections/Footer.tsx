@@ -4,7 +4,7 @@ import { SOCIAL_LINKS } from "../../data/socials";
 export const Footer: React.FC = () => {
   return (
     <footer className="py-12 bg-[#FAFAF8] border-t border-[#e4e2dc]">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-[#a1a1aa] uppercase tracking-widest">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-[#71717a] uppercase tracking-widest">
         <p>&copy; {new Date().getFullYear()} Prince.</p>
         <div className="flex items-center gap-6 mt-4 md:mt-0">
           <a
