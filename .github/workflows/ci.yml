@@ -12,20 +12,19 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x] # or keep 18.x, but 20.x is safer for modern toolchains
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - name: Install Dependencies
-        run: |
-          rm -rf package-lock.json node_modules
-          npm install
+        run: npm ci --include=optional
 
       - name: Run Analysis (Lint/Types/Security)
         run: npm run analyze
