@@ -7,8 +7,10 @@ export const reels: Reel[] = [
     client: "Healthcare Client",
     videoUrl: "/reels/health_sector.mp4",
     posterUrl: "https://picsum.photos/id/1/450/800", // Placeholder poster
-    duration: "0:30", // Placeholder duration
+    duration: "0:30",
     tags: ["Health", "Corporate"],
+    niche: "Healthcare",
+    description: "Clinic brand awareness reel — generated 45k+ organic views.",
   },
   {
     id: "2",
@@ -18,6 +20,8 @@ export const reels: Reel[] = [
     posterUrl: "https://picsum.photos/id/2/450/800",
     duration: "0:30",
     tags: ["Interior", "Design"],
+    niche: "Interior Design",
+    description: "Luxury walkthrough reel — drove 12% increase in listing inquiries.",
   },
   {
     id: "3",
@@ -27,6 +31,8 @@ export const reels: Reel[] = [
     posterUrl: "https://picsum.photos/id/3/450/800",
     duration: "0:30",
     tags: ["Real Estate", "Property"],
+    niche: "Real Estate",
+    description: "Property listing reel — cinematic storytelling that accelerated sale by 2 weeks.",
   },
   {
     id: "4",
@@ -36,5 +42,7 @@ export const reels: Reel[] = [
     posterUrl: "https://picsum.photos/id/4/450/800",
     duration: "0:30",
     tags: ["Finance", "Trading"],
+    niche: "Finance",
+    description: "Authority-building reel — generated 150+ qualified platform signups.",
   },
 ];

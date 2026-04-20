@@ -34,10 +34,10 @@ https://github.com/cod-x-prince/video-editing-portfolio
 ### 📅 Booking System (Google Calendar)
 
 - “Book a Call” flow for clients
-- Booking requests stored server-side
+- Booking requests create Google Calendar events from the backend
 - Google Calendar OAuth integration
 - Calendar access is **secure, private, and token-based**
-- Designed for approval / reschedule workflows
+- Admin review endpoint is currently disabled in stateless deployment until a persistent DB is added
 
 ### 🧠 Agentic Architecture
 
@@ -64,7 +64,7 @@ https://github.com/cod-x-prince/video-editing-portfolio
 
 - **Vercel Serverless Functions**
 - Node.js 18 runtime
-- File-based persistence (for lightweight booking data)
+- Stateless serverless pattern (calendar/email as source of truth)
 
 ### Integrations
 
@@ -82,27 +82,33 @@ https://github.com/cod-x-prince/video-editing-portfolio
 │   ├── contact.ts           # Secure email sending (Resend)
 │   ├── book/
 │   │   ├── request.ts       # Booking request handler
-│   │   └── review.ts        # Booking review logic
+│   │   └── review.ts        # Disabled admin review endpoint
 │   ├── calendar/
 │   │   ├── auth.ts          # Google OAuth start
 │   │   └── callback.ts      # OAuth callback & token storage
 │   └── utils/
-│       ├── db.ts            # File-based persistence
-│       └── calendar.ts      # Calendar helper utilities
+│       └── db.js            # Stateless booking persistence shim
 │
 ├── components/
 │   ├── BookingModal.tsx
 │   ├── ContactModal.tsx
 │   ├── ErrorBoundary.tsx
-│   └── AdminDashboard.tsx
+│   ├── Navigation.tsx
+│   └── sections/
+│       ├── ReelsSection.tsx
+│       ├── ProcessSection.tsx
+│       └── Footer.tsx
 │
-├── data/                    # Runtime data (gitignored)
+├── data/
+│   ├── reels.ts
+│   └── socials.ts
 ├── public/
-│   └── reels/               # Instagram-format videos
+│   ├── reels/               # Instagram-format videos
+│   └── profile/
 │
-├── src/
-│   └── main UI logic
-│
+├── safe-archive/            # Archived legacy docs/reports
+├── App.tsx
+├── index.tsx
 ├── index.html
 ├── package.json
 └── README.md

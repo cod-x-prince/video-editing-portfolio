@@ -24,11 +24,16 @@
     "three": "0.160.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^22.19.17",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vercel/node": "^4.0.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
