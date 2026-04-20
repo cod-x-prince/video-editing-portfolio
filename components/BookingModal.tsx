@@ -51,7 +51,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#18181b]/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-[#18181b]/70"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
