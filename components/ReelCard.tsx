@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Reel } from '../types';
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Reel } from "../types";
 
 interface ReelCardProps {
   reel: Reel;
@@ -38,7 +38,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
     if (videoRef.current) {
       videoRef.current.pause();
       setIsPlaying(false);
-      videoRef.current.currentTime = 0; 
+      videoRef.current.currentTime = 0;
     }
   };
 
@@ -56,10 +56,10 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
     >
       <video
         ref={videoRef}
-        src={`${reel.videoUrl}#t=0.001`}
+        src={`${reel.videoUrl}#t=${reel.previewTime ?? 0.001}`}
         poster={reel.posterUrl}
         preload="metadata"
-        className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`}
         loop
         playsInline
         onLoadedData={() => setIsLoaded(true)}
@@ -71,7 +71,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       )}
 
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-      
+
       {/* Persistent Niche Badge */}
       {reel.niche && (
         <div className="absolute bottom-4 left-4 z-10">
@@ -93,8 +93,14 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       {!isPlaying && isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 5v14l11-7L8 5z"/>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="white"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M8 5v14l11-7L8 5z" />
             </svg>
           </div>
         </div>

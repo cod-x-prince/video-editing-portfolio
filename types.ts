@@ -20,6 +20,7 @@ export interface Reel {
   tags: string[];
   niche?: string;
   description?: string;
+  previewTime?: number; // seconds into the video for the preview frame (default: 0.001)
 }
 
 export interface ProcessStep {
