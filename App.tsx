@@ -31,66 +31,170 @@ const NotFoundPage = () => (
 );
 
 const MainLoader = () => {
-  const [count, setCount] = useState(0);
+  const [blobSize, setBlobSize]           = useState(0);
+  const [glowOn, setGlowOn]               = useState(false);
+  const [logoOn, setLogoOn]               = useState(false);
+  const [bigWordOn, setBigWordOn]         = useState(false);
+  const [stmtOn, setStmtOn]               = useState(false);
+  const [counterOn, setCounterOn]         = useState(false);
+  const [counterVal, setCounterVal]       = useState(0);
+  const [activeTick, setActiveTick]       = useState(-1);
+
+  // Respect prefers-reduced-motion
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useEffect(() => {
-    let start = 0;
-    const duration = 800; // [FIX #5] Cut from 2000ms
-    const intervalTime = 20;
-    const steps = duration / intervalTime;
-    const increment = 100 / steps;
+    if (reducedMotion) return; // App timer will handle unmount
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= 100) {
-        setCount(100);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, intervalTime);
+    const t: ReturnType<typeof setTimeout>[] = [];
 
-    return () => clearInterval(timer);
+    // Beat 1 — Warmth (80ms)
+    t.push(setTimeout(() => { setLogoOn(true);  setActiveTick(0); }, 80));
+
+    // Beat 2 — Cursor bloom (300ms)
+    t.push(setTimeout(() => { setBlobSize(72); setGlowOn(true); setActiveTick(1); }, 300));
+
+    // Beat 3 — One word (650ms)
+    t.push(setTimeout(() => { setBigWordOn(true); setActiveTick(2); }, 650));
+
+    // Blob pulse
+    t.push(setTimeout(() => setBlobSize(88), 960));
+    t.push(setTimeout(() => setBlobSize(72), 1120));
+
+    // Beat 4 — Statement (1150ms)
+    t.push(setTimeout(() => { setStmtOn(true); setActiveTick(3); }, 1150));
+
+    // Beat 5 — Counter (1580ms)
+    t.push(setTimeout(() => {
+      setCounterOn(true);
+      setActiveTick(4);
+      const target = 50000, dur = 420, start = performance.now();
+      const countUp = (now: number) => {
+        const p    = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        setCounterVal(Math.floor(ease * target));
+        if (p < 1) requestAnimationFrame(countUp);
+      };
+      requestAnimationFrame(countUp);
+    }, 1580));
+
+    return () => t.forEach(clearTimeout);
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-100 bg-[#FAFAF8] flex flex-col items-center justify-center overflow-hidden"
+      exit={{ opacity: 0, transition: { duration: 0.7, ease: 'easeInOut' } }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: '#FAFAF8', overflow: 'hidden',
+        WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale',
+      }}
     >
-      <div className="relative w-16 md:w-24 lg:w-22 h-16 md:h-24 lg:h-22">
-        {/* Ball Shadow */}
-        <motion.div
-          initial={{ x: "-50%" }}
-          animate={{ 
-            x: "-50%",
-            scale: [1, 0.3, 1], 
-            opacity: [0.7, 0.1, 0.7],
-            filter: ["blur(4px)", "blur(12px)", "blur(4px)"]
-          }}
-          transition={{ repeat: Infinity, duration: 0.9, ease: ["easeOut", "easeIn"] }}
-          className="w-14 md:w-20 lg:w-24 h-3 md:h-4 bg-black rounded-[100%] absolute left-1/2 bottom-[-10px] md:bottom-[-16px]"
-        />
-        {/* Bouncing Ball */}
-        <motion.div 
-          animate={{ 
-            y: [0, -180, 0], 
-            scaleY: [0.7, 1.15, 1, 1.15, 0.7], 
-            scaleX: [1.3, 0.85, 1, 0.85, 1.3]
-          }}
-          transition={{ 
-            y: { repeat: Infinity, duration: 0.9, ease: ["easeOut", "easeIn"] },
-            scaleY: { repeat: Infinity, duration: 0.9, times: [0, 0.15, 0.5, 0.85, 1], ease: "easeInOut" },
-            scaleX: { repeat: Infinity, duration: 0.9, times: [0, 0.15, 0.5, 0.85, 1], ease: "easeInOut" }
-          }}
-          className="w-full h-full rounded-full bg-[#d97706] relative z-10 origin-bottom shadow-lg"
-        />
+      {/* Corner logo — Prince. */}
+      <div style={{
+        position: 'fixed', top: '28px', left: '32px',
+        fontFamily: "'Syne', sans-serif",
+        fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
+        fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1,
+        color: '#18181b',
+        opacity: logoOn ? 1 : 0,
+        transition: 'opacity 0.7s ease',
+        userSelect: 'none', zIndex: 10000,
+      }}>
+        Prince<span style={{ color: '#d97706' }}>.</span>
       </div>
-      
-      <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 flex items-baseline font-syne">
-        <span className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-[#18181b] tracking-tighter leading-[1.05]">{count}</span>
-        <span className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-[#d97706] leading-[1.05]">.</span>
+
+      {/* Ambient amber glow */}
+      <div style={{
+        position: 'absolute', width: '380px', height: '380px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(217,119,6,0.10) 0%, transparent 70%)',
+        opacity: glowOn ? 1 : 0,
+        transition: 'opacity 1.4s ease',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Blob */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        width: `${blobSize}px`, height: `${blobSize}px`, borderRadius: '50%',
+        background: '#d97706', mixBlendMode: 'multiply',
+        transform: 'translate(-50%, -50%)',
+        transition: 'width 0.75s cubic-bezier(0.34,1.56,0.64,1), height 0.75s cubic-bezier(0.34,1.56,0.64,1)',
+        opacity: 0.45, filter: 'blur(2px)', pointerEvents: 'none',
+      }} />
+
+      {/* Text stack */}
+      <div style={{
+        position: 'relative', zIndex: 2,
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        gap: '16px', textAlign: 'center', padding: '0 24px', pointerEvents: 'none',
+      }}>
+        {/* "Convinced." */}
+        <div style={{
+          fontFamily: "'Syne', sans-serif",
+          fontSize: 'clamp(3.2rem, 6.5vw, 5.5rem)',
+          fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.05,
+          color: '#18181b',
+          opacity: bigWordOn ? 1 : 0,
+          transform: bigWordOn ? 'scale(1) translateY(0)' : 'scale(0.92) translateY(8px)',
+          transition: 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.2,0.64,1)',
+        }}>
+          Convinced.
+        </div>
+
+        {/* Statement line */}
+        <div style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+          fontWeight: 300, letterSpacing: '0.01em', lineHeight: 1.6,
+          color: '#71717a',
+          opacity: stmtOn ? 1 : 0,
+          transform: stmtOn ? 'translateY(0)' : 'translateY(8px)',
+          transition: 'opacity 0.5s ease, transform 0.5s ease',
+          display: 'flex', alignItems: 'center', flexWrap: 'wrap',
+          justifyContent: 'center', gap: '6px',
+        }}>
+          <span>Most editors</span>
+          <span style={{
+            textDecoration: 'line-through', textDecorationColor: '#d4d2cc',
+            textDecorationThickness: '1px', color: '#a1a1aa',
+          }}>entertain.</span>
+          <span>I</span>
+          <span style={{ color: '#d97706', fontWeight: 500 }}>convince.</span>
+        </div>
+
+        {/* Counter */}
+        <div style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: '0.7rem', fontWeight: 400,
+          letterSpacing: '0.18em', textTransform: 'uppercase',
+          color: '#b5b3ae',
+          opacity: counterOn ? 1 : 0,
+          transition: 'opacity 0.45s ease',
+          marginTop: '2px',
+        }}>
+          <span style={{ color: '#d97706', fontWeight: 500 }}>
+            {counterVal.toLocaleString()}
+          </span>+ viewers convinced
+        </div>
+      </div>
+
+      {/* Progress dots */}
+      <div style={{
+        position: 'fixed', bottom: '28px', left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex', gap: '7px', zIndex: 10000,
+      }}>
+        {[0, 1, 2, 3, 4].map(i => (
+          <div key={i} style={{
+            width: '5px', height: '5px', borderRadius: '50%',
+            background: activeTick === i ? '#d97706' : '#e4e2dc',
+            transform: activeTick === i ? 'scale(1.4)' : 'scale(1)',
+            transition: 'background 0.3s ease, transform 0.3s ease',
+          }} />
+        ))}
       </div>
     </motion.div>
   );
@@ -108,7 +212,7 @@ const App: React.FC = () => {
     window.addEventListener("popstate", handleLocationChange);
     
     // Simulate Initial Custom Loader
-    const timer = setTimeout(() => setInitialLoading(false), 800); // [FIX #5]
+    const timer = setTimeout(() => setInitialLoading(false), 2050); // Beat 6 starts at 2050ms
 
     document.documentElement.style.scrollBehavior = "smooth";
     return () => {
