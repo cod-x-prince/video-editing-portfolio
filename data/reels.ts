@@ -45,4 +45,16 @@ export const reels: Reel[] = [
     niche: "Finance",
     description: "Authority-building reel — generated 150+ qualified platform signups.",
   },
+  {
+    id: "5",
+    title: "Romana Edit",
+    client: "Romana",
+    videoUrl: "/reels/romanaEdit.mp4",
+    posterUrl: "/reels/romanaEdit_poster.jpg",
+    previewTime: 1.0, // 30th frame at 30fps
+    duration: "0:30",
+    tags: ["Lifestyle", "Editing"],
+    niche: "Content Creator",
+    description: "High-energy edit for Romana — boost in engagement and audience retention.",
+  },
 ];
