@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, AlertCircle, CheckCircle, Calendar } from "lucide-react";
+import { X, AlertCircle, CheckCircle } from "lucide-react";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -11,7 +11,7 @@ interface ContactModalProps {
 export const ContactModal: React.FC<ContactModalProps> = ({
   isOpen,
   onClose,
-  onOpenBooking
+  onOpenBooking,
 }) => {
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
@@ -53,10 +53,28 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     }
   };
 
-  const handleBookDirectly = () => {
-    onClose();
-    onOpenBooking();
-  };
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const modal = document.getElementById("contact-modal");
+        if (!modal) return;
+        const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0] as HTMLElement;
+        const last = focusable[focusable.length - 1] as HTMLElement;
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -74,6 +92,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            id="contact-modal"
             className="relative w-full max-w-md bg-[#FAFAF8] border border-[#e4e2dc] rounded-2xl p-8 shadow-2xl"
           >
             <button
@@ -95,14 +114,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 <CheckCircle size={48} className="mb-4 text-[#085041]" />
                 <p className="font-bold text-lg text-[#18181b] mb-2">Conversation Started.</p>
                 <p className="text-[#444441] text-sm mb-8 leading-relaxed">
-                  I will review your project and email you back soon. If you prefer to jump straight to a direct discussion, you can book me directly below.
+                  I will review your project and email you back soon. Direct booking is temporarily paused on the public portfolio branch while scheduling protections are being rebuilt.
                 </p>
-                <button
-                  onClick={handleBookDirectly}
-                  className="w-full bg-[#18181b] text-[#FAFAF8] border border-[#18181b] font-bold py-3 rounded-lg hover:bg-transparent hover:text-[#18181b] transition-all flex items-center justify-center gap-2"
-                >
-                  <Calendar size={18} /> Book Directly
-                </button>
+                <p className="w-full rounded-lg border border-[#e4e2dc] bg-[#f5f3ee] px-4 py-3 text-sm text-[#52525b]">
+                  Mention your preferred timeline in the message and I will follow up manually with next steps.
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -115,10 +131,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="name" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Name
                     </label>
                     <input
+                      id="name"
                       name="name"
                       required
                       className="w-full bg-[#f5f3ee] border border-[#e4e2dc] rounded-lg px-4 py-2 text-[#18181b] focus:outline-none focus:border-[#d97706] transition-all placeholder:text-[#a1a1aa]"
@@ -126,10 +143,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="email" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Email
                     </label>
                     <input
+                      id="email"
                       name="email"
                       type="email"
                       required
@@ -140,10 +158,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                  <label htmlFor="subject" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                     Subject
                   </label>
                   <input
+                    id="subject"
                     name="subject"
                     required
                     className="w-full bg-[#f5f3ee] border border-[#e4e2dc] rounded-lg px-4 py-2 text-[#18181b] focus:outline-none focus:border-[#d97706] transition-all placeholder:text-[#a1a1aa]"
@@ -152,10 +171,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                  <label htmlFor="message" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                     The Vision
                   </label>
                   <textarea
+                    id="message"
                     name="message"
                     required
                     rows={4}

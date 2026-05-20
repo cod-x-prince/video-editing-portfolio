@@ -34,9 +34,7 @@ https://github.com/cod-x-prince/video-editing-portfolio
 ### 📅 Booking System (Google Calendar)
 
 - “Book a Call” flow for clients
-- Booking requests create Google Calendar events from the backend
-- Google Calendar OAuth integration
-- Calendar access is **secure, private, and token-based**
+- Booking and Google Calendar OAuth are temporarily disabled on the public-safe branch while abuse protections are rebuilt
 - Admin review endpoint is currently disabled in stateless deployment until a persistent DB is added
 
 ### 🧠 Agentic Architecture

@@ -27,3 +27,7 @@ dist-ssr
 !.env.example
 
 .vercel
+
+# Archived scan artifacts can contain copied secret excerpts from local env files.
+safe-archive/legacy-docs/analysis-report*.json
+safe-archive/legacy-docs/full-project-report-*.md
