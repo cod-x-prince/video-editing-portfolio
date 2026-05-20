@@ -1,12 +1,54 @@
-import { Reel } from "../types";
+import { Reel, ReelSource } from "../types";
 
-export const reels: Reel[] = [
+const CLOUDINARY_CLOUD_NAME = "dqbmflby5";
+const CLOUDINARY_VIDEO_TRANSFORM = "f_auto,q_auto:good,vc_auto,w_540,c_limit";
+const CLOUDINARY_POSTER_TRANSFORM = "f_auto,q_auto,w_540,h_960,c_fill,g_auto";
+
+function buildCloudinaryAssetUrl(
+  resourceType: "image" | "video",
+  transform: string,
+  publicId: string,
+  extension?: string,
+) {
+  const suffix = extension ? `.${extension}` : "";
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload/${transform}/${publicId}${suffix}`;
+}
+
+function buildCloudinaryVideoUrl(publicId: string) {
+  return buildCloudinaryAssetUrl("video", CLOUDINARY_VIDEO_TRANSFORM, publicId);
+}
+
+function buildCloudinaryPosterUrl({
+  cloudinaryPosterPublicId,
+  cloudinaryVideoPublicId,
+  previewTime = 0.001,
+}: Pick<
+  ReelSource,
+  "cloudinaryPosterPublicId" | "cloudinaryVideoPublicId" | "previewTime"
+>) {
+  if (cloudinaryPosterPublicId) {
+    return buildCloudinaryAssetUrl(
+      "image",
+      CLOUDINARY_POSTER_TRANSFORM,
+      cloudinaryPosterPublicId,
+    );
+  }
+
+  return buildCloudinaryAssetUrl(
+    "video",
+    `${CLOUDINARY_POSTER_TRANSFORM},so_${previewTime}`,
+    cloudinaryVideoPublicId,
+    "jpg",
+  );
+}
+
+const reelSources: ReelSource[] = [
   {
     id: "6",
     title: "Video 1",
     client: "Spec Edit — Brand Film",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}video1_graded.mp4`,
-    cloudPosterUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}video1_graded_poster.jpg`,
+    cloudinaryVideoPublicId: "video1_graded_et8bvm",
+    cloudinaryPosterPublicId: "video1_graded_poster_jwegbk",
     previewTime: 34,
     duration: "0:57",
     tags: ["Spec Edit", "Brand Film"],
@@ -17,8 +59,8 @@ export const reels: Reel[] = [
     id: "7",
     title: "Video 2",
     client: "Spec Edit — Talking Head",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}khurana_final_video.mp4`,
-    cloudPosterUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}khurana_final_poster.jpg`,
+    cloudinaryVideoPublicId: "khurana_final_video_tyxi0s",
+    cloudinaryPosterPublicId: "khurana_final_poster_gnfram",
     previewTime: 22,
     duration: "0:33",
     tags: ["Spec Edit", "Talking Head"],
@@ -29,8 +71,8 @@ export const reels: Reel[] = [
     id: "1",
     title: "Video 3",
     client: "Spec Edit — Healthcare",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}health_sector.mp4`,
-    cloudPosterUrl: "https://picsum.photos/id/1/450/800", // Placeholder poster
+    cloudinaryVideoPublicId: "health_sector_x49luv",
+    previewTime: 3,
     duration: "0:30",
     tags: ["Spec Edit", "Healthcare"],
     niche: "Healthcare",
@@ -40,8 +82,8 @@ export const reels: Reel[] = [
     id: "2",
     title: "Video 4",
     client: "Spec Edit — Interior Design",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}home_interior.mp4`,
-    cloudPosterUrl: "https://picsum.photos/id/2/450/800",
+    cloudinaryVideoPublicId: "home_interior_p8kyhy",
+    previewTime: 2,
     duration: "0:30",
     tags: ["Spec Edit", "Interior Design"],
     niche: "Interior Design",
@@ -51,8 +93,8 @@ export const reels: Reel[] = [
     id: "3",
     title: "Video 5",
     client: "Spec Edit — Property",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}real_estate.mp4`,
-    cloudPosterUrl: "https://picsum.photos/id/3/450/800",
+    cloudinaryVideoPublicId: "real_estate_wcupeb",
+    previewTime: 2,
     duration: "0:30",
     tags: ["Spec Edit", "Property"],
     niche: "Property",
@@ -62,8 +104,8 @@ export const reels: Reel[] = [
     id: "5",
     title: "Video 6",
     client: "Spec Edit — Content Creator",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}romanaEdit.mp4`,
-    cloudPosterUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}romanaEdit_poster.jpg`,
+    cloudinaryVideoPublicId: "romanaEdit_dah0on",
+    cloudinaryPosterPublicId: "romanaEdit_poster_rinvug",
     previewTime: 1.0, // 30th frame at 30fps
     duration: "0:30",
     tags: ["Spec Edit", "Content Creator"],
@@ -74,11 +116,17 @@ export const reels: Reel[] = [
     id: "4",
     title: "Video 7",
     client: "Spec Edit — Finance",
-    cloudVideoUrl: `${import.meta.env.VITE_VIDEO_BASE_URL}trading_reel.mp4`,
-    cloudPosterUrl: "https://picsum.photos/id/4/450/800",
+    cloudinaryVideoPublicId: "trading_reel_gdjmmc",
+    previewTime: 2,
     duration: "0:30",
     tags: ["Spec Edit", "Finance"],
     niche: "Finance",
     description: "A trial cut focused on making finance content feel urgent without becoming overly salesy.",
   },
 ];
+
+export const reels: Reel[] = reelSources.map((reel) => ({
+  ...reel,
+  cloudVideoUrl: buildCloudinaryVideoUrl(reel.cloudinaryVideoPublicId),
+  cloudPosterUrl: buildCloudinaryPosterUrl(reel),
+}));

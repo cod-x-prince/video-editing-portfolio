@@ -10,38 +10,71 @@ interface ReelCardProps {
 export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPosterLoaded, setIsPosterLoaded] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [pendingPlay, setPendingPlay] = useState(false);
   const reelIndex = String(index + 1).padStart(2, "0");
 
-  const handleInteraction = async () => {
-    if (videoRef.current) {
+  const playLoadedVideo = async () => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    try {
+      video.muted = false;
+      await video.play();
+      setIsPlaying(true);
+    } catch (err) {
+      console.warn("Unmuted autoplay prevented. Falling back to muted.");
       try {
-        videoRef.current.muted = false; // play with sound as requested
-        await videoRef.current.play();
+        video.muted = true;
+        await video.play();
         setIsPlaying(true);
-      } catch (err) {
-        // Browser prevented unmuted autoplay, fallback to muted autoplay
-        console.warn("Unmuted autoplay prevented. Falling back to muted.");
-        if (videoRef.current) {
-          try {
-            videoRef.current.muted = true;
-            await videoRef.current.play();
-            setIsPlaying(true);
-          } catch (fallbackErr) {
-            console.error("Autoplay completely prevented.");
-          }
-        }
+      } catch (fallbackErr) {
+        console.error("Autoplay completely prevented.");
       }
     }
+
+    setPendingPlay(false);
+  };
+
+  const primeVideo = () => {
+    setShouldLoadVideo(true);
+  };
+
+  const requestPlayback = () => {
+    setShouldLoadVideo(true);
+
+    if (isVideoReady) {
+      void playLoadedVideo();
+      return;
+    }
+
+    setPendingPlay(true);
   };
 
   const stopInteraction = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-      videoRef.current.currentTime = 0;
+    setPendingPlay(false);
+
+    const video = videoRef.current;
+    if (!video) {
+      return;
     }
+
+    video.pause();
+    video.currentTime = 0;
+    setIsPlaying(false);
   };
+
+  useEffect(() => {
+    if (!shouldLoadVideo || !isVideoReady || !pendingPlay) {
+      return;
+    }
+
+    void playLoadedVideo();
+  }, [isVideoReady, pendingPlay, shouldLoadVideo]);
 
   return (
     <motion.div
@@ -50,14 +83,15 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`group relative aspect-9/16 rounded-xl overflow-hidden bg-[#e4e2dc] border border-[#e4e2dc] cursor-pointer`}
-      onMouseEnter={handleInteraction}
+      onMouseEnter={requestPlayback}
       onMouseLeave={stopInteraction}
-      onClick={handleInteraction} /* mobile support */
+      onFocus={primeVideo}
+      onClick={requestPlayback} /* mobile support */
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           if (isPlaying) stopInteraction();
-          else handleInteraction();
+          else requestPlayback();
         }
       }}
       tabIndex={0}
@@ -65,19 +99,32 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       aria-label={`Play video reel: ${reel.title}`}
       data-cursor="video"
     >
-      <video
-        ref={videoRef}
-        src={`${reel.cloudVideoUrl}#t=${reel.previewTime ?? 0.001}`}
-        poster={reel.cloudPosterUrl}
-        preload="none"
-        className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-        loop
-        playsInline
-        onLoadedData={() => setIsLoaded(true)}
+      <img
+        src={reel.cloudPosterUrl}
+        alt={`${reel.title} poster`}
+        loading={index < 2 ? "eager" : "lazy"}
+        decoding="async"
+        className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out ${
+          isPosterLoaded ? "opacity-100" : "opacity-0"
+        } ${!isPlaying ? "group-hover:scale-105" : ""}`}
+        onLoad={() => setIsPosterLoaded(true)}
       />
 
-      {/* Loading pulse before video loads */}
-      {!isLoaded && (
+      {shouldLoadVideo && (
+        <video
+          ref={videoRef}
+          src={reel.cloudVideoUrl}
+          preload="metadata"
+          className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out transform group-hover:scale-105 ${
+            isVideoReady ? "opacity-100" : "opacity-0"
+          }`}
+          loop
+          playsInline
+          onLoadedData={() => setIsVideoReady(true)}
+        />
+      )}
+
+      {!isPosterLoaded && (
         <div className="absolute inset-0 bg-[#e4e2dc] animate-pulse" />
       )}
 
@@ -125,7 +172,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
         </div>
       )}
 
-      {!isPlaying && isLoaded && (
+      {!isPlaying && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
             <svg

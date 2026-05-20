@@ -23,6 +23,11 @@ export interface Reel {
   previewTime?: number; // seconds into the video for the preview frame (default: 0.001)
 }
 
+export interface ReelSource extends Omit<Reel, "cloudVideoUrl" | "cloudPosterUrl"> {
+  cloudinaryVideoPublicId: string;
+  cloudinaryPosterPublicId?: string;
+}
+
 export interface ProcessStep {
   step: string;
   title: string;
