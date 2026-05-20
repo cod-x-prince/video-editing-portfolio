@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, Clock, CheckCircle, AlertCircle } from "lucide-react";
 
@@ -22,11 +22,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
+    const dateStr = data.date as string;
+    const timeStr = data.time as string;
+    const localDateTime = new Date(`${dateStr}T${timeStr}`);
+    const utcDateTime = localDateTime.toISOString();
+
+    const payload = {
+      name: data.name,
+      email: data.email,
+      utcDateTime,
+      notes: data.notes
+    };
+
     try {
       const response = await fetch("/api/book/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) throw new Error("Failed to book");
@@ -41,6 +53,29 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setStatus("error");
     }
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const modal = document.getElementById("booking-modal");
+        if (!modal) return;
+        const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0] as HTMLElement;
+        const last = focusable[focusable.length - 1] as HTMLElement;
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -57,6 +92,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
+            id="booking-modal"
             className="relative w-full max-w-md bg-[#FAFAF8] border border-[#e4e2dc] rounded-2xl p-8 shadow-2xl"
           >
             <button
@@ -84,10 +120,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="name" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Name
                     </label>
                     <input
+                      id="name"
                       name="name"
                       required
                       className="w-full bg-[#f5f3ee] border border-[#e4e2dc] rounded-lg px-4 py-2 text-[#18181b] placeholder:text-[#a1a1aa] focus:outline-none focus:border-[#d97706] transition-colors"
@@ -95,10 +132,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="email" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Email
                     </label>
                     <input
+                      id="email"
                       name="email"
                       type="email"
                       required
@@ -110,11 +148,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="date" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Date
                     </label>
                     <div className="relative">
                       <input
+                        id="date"
                         name="date"
                         type="date"
                         required
@@ -127,11 +166,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <label className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
+                    <label htmlFor="time" className="text-[10px] font-medium text-[#a1a1aa] uppercase tracking-widest">
                       Time
                     </label>
                     <div className="relative">
                       <input
+                        id="time"
                         name="time"
                         type="time"
                         required

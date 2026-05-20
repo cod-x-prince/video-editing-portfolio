@@ -31,3 +31,6 @@ dist-ssr
 # Archived scan artifacts can contain copied secret excerpts from local env files.
 safe-archive/legacy-docs/analysis-report*.json
 safe-archive/legacy-docs/full-project-report-*.md
+
+# Local authoring notes
+PROJECT_CONTEXT_FOR_AI.md

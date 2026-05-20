@@ -1,7 +1,6 @@
 export interface Booking {
   email: string;
-  date: string;
-  time: string;
+  utcDateTime: string;
   name?: string;
   notes?: string;
   calendarEventId?: string;

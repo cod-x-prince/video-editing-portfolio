@@ -11,6 +11,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const reelIndex = String(index + 1).padStart(2, "0");
 
   const handleInteraction = async () => {
     if (videoRef.current) {
@@ -52,13 +53,23 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       onMouseEnter={handleInteraction}
       onMouseLeave={stopInteraction}
       onClick={handleInteraction} /* mobile support */
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (isPlaying) stopInteraction();
+          else handleInteraction();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`Play video reel: ${reel.title}`}
       data-cursor="video"
     >
       <video
         ref={videoRef}
-        src={`${reel.videoUrl}#t=${reel.previewTime ?? 0.001}`}
-        poster={reel.posterUrl}
-        preload="metadata"
+        src={`${reel.cloudVideoUrl}#t=${reel.previewTime ?? 0.001}`}
+        poster={reel.cloudPosterUrl}
+        preload="none"
         className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`}
         loop
         playsInline
@@ -72,21 +83,45 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
 
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
-      {/* Persistent Niche Badge */}
-      {reel.niche && (
-        <div className="absolute bottom-4 left-4 z-10">
-          <span className="bg-[#d97706] text-[#18181b] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
-            {reel.niche}
-          </span>
+      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4 text-white">
+        <div className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] backdrop-blur-md">
+          {reelIndex}
         </div>
-      )}
+        <div className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-md">
+          {isPlaying ? "Playing" : reel.duration}
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 z-10 p-4 pt-20 text-white transition-opacity duration-300 group-hover:opacity-0">
+        <div className="flex flex-col items-start gap-2">
+          {reel.niche && (
+            <span className="bg-[#d97706] text-[#18181b] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+              {reel.niche}
+            </span>
+          )}
+          <p className="text-[10px] uppercase tracking-[0.22em] text-white/70">
+            {reel.client}
+          </p>
+          <h3 className="max-w-[92%] text-base md:text-lg font-syne font-bold tracking-tight leading-tight">
+          {reel.title}
+          </h3>
+        </div>
+      </div>
 
       {/* [FIX #6] Description overlay on hover */}
       {reel.description && (
-        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none pb-12">
-          <p className="text-white text-sm mt-1 leading-relaxed">
+        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
+          <div className="max-w-[88%] rounded-2xl border border-white/10 bg-black/45 p-4 backdrop-blur-sm">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-white/65">
+              {reel.client}
+            </p>
+            <h3 className="mt-2 text-lg font-syne font-bold tracking-tight text-white">
+              {reel.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/90">
             {reel.description}
-          </p>
+            </p>
+          </div>
         </div>
       )}
 

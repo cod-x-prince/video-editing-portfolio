@@ -1,6 +1,7 @@
 import { ProcessStep } from './types';
 
 export const HERO_SUB = "I make minimal, intentional short-form content for personal brands that are building something worth watching.";
+export const ENABLE_3D_REEL_CAROUSEL = false;
 
 export const PROCESS_STEPS: ProcessStep[] = [
   {
