@@ -6,7 +6,7 @@ export interface Project {
   year: string;
   description: string;
   thumbnailUrl: string;
-  videoUrl?: string; // Optional for this demo
+  cloudVideoUrl?: string; // Optional for this demo
   tags: string[];
 }
 
@@ -14,13 +14,18 @@ export interface Reel {
   id: string;
   title: string;
   client: string;
-  videoUrl: string;
-  posterUrl?: string;
+  cloudVideoUrl: string;
+  cloudPosterUrl: string;
   duration: string;
   tags: string[];
   niche?: string;
   description?: string;
   previewTime?: number; // seconds into the video for the preview frame (default: 0.001)
+}
+
+export interface ReelSource extends Omit<Reel, "cloudVideoUrl" | "cloudPosterUrl"> {
+  cloudinaryVideoPublicId: string;
+  cloudinaryPosterPublicId?: string;
 }
 
 export interface ProcessStep {

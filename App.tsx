@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HERO_SUB } from "./constants";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { ENABLE_3D_REEL_CAROUSEL, HERO_SUB } from "./constants";
 import { Navigation } from "./components/Navigation";
 import { ArrowRight, Lock, EyeOff, Check, X } from "lucide-react";
 import { ContactModal } from "./components/ContactModal";
 import { BookingModal } from "./components/BookingModal";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ExperimentalReelCarouselSection } from "./components/sections/ExperimentalReelCarouselSection";
 import { ReelsSection } from "./components/sections/ReelsSection";
 import { ProcessSection } from "./components/sections/ProcessSection";
 import { Footer } from "./components/sections/Footer";
@@ -36,8 +44,6 @@ const MainLoader = () => {
   const [logoOn, setLogoOn]               = useState(false);
   const [bigWordOn, setBigWordOn]         = useState(false);
   const [stmtOn, setStmtOn]               = useState(false);
-  const [counterOn, setCounterOn]         = useState(false);
-  const [counterVal, setCounterVal]       = useState(0);
   const [activeTick, setActiveTick]       = useState(-1);
 
   // Respect prefers-reduced-motion
@@ -64,19 +70,7 @@ const MainLoader = () => {
     // Beat 4 — Statement (1150ms)
     t.push(setTimeout(() => { setStmtOn(true); setActiveTick(3); }, 1150));
 
-    // Beat 5 — Counter (1580ms)
-    t.push(setTimeout(() => {
-      setCounterOn(true);
-      setActiveTick(4);
-      const target = 50000, dur = 420, start = performance.now();
-      const countUp = (now: number) => {
-        const p    = Math.min((now - start) / dur, 1);
-        const ease = 1 - Math.pow(1 - p, 3);
-        setCounterVal(Math.floor(ease * target));
-        if (p < 1) requestAnimationFrame(countUp);
-      };
-      requestAnimationFrame(countUp);
-    }, 1580));
+
 
     return () => t.forEach(clearTimeout);
   }, []);
@@ -165,20 +159,7 @@ const MainLoader = () => {
           <span style={{ color: '#d97706', fontWeight: 500 }}>convince.</span>
         </div>
 
-        {/* Counter */}
-        <div style={{
-          fontFamily: "'Inter', sans-serif",
-          fontSize: '0.7rem', fontWeight: 400,
-          letterSpacing: '0.18em', textTransform: 'uppercase',
-          color: '#b5b3ae',
-          opacity: counterOn ? 1 : 0,
-          transition: 'opacity 0.45s ease',
-          marginTop: '2px',
-        }}>
-          <span style={{ color: '#d97706', fontWeight: 500 }}>
-            {counterVal.toLocaleString()}
-          </span>+ viewers convinced
-        </div>
+
       </div>
 
       {/* Progress dots */}
@@ -187,7 +168,7 @@ const MainLoader = () => {
         transform: 'translateX(-50%)',
         display: 'flex', gap: '7px', zIndex: 10000,
       }}>
-        {[0, 1, 2, 3, 4].map(i => (
+        {[0, 1, 2, 3].map(i => (
           <div key={i} style={{
             width: '5px', height: '5px', borderRadius: '50%',
             background: activeTick === i ? '#d97706' : '#e4e2dc',
@@ -205,6 +186,38 @@ const App: React.FC = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const heroRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroTextY = useSpring(
+    useTransform(heroProgress, [0, 1], [0, prefersReducedMotion ? 0 : 88]),
+    { stiffness: 120, damping: 24, mass: 0.3 }
+  );
+  const heroVisualY = useSpring(
+    useTransform(heroProgress, [0, 1], [0, prefersReducedMotion ? 0 : -72]),
+    { stiffness: 120, damping: 22, mass: 0.35 }
+  );
+  const heroFrameY = useSpring(
+    useTransform(heroProgress, [0, 1], [0, prefersReducedMotion ? 0 : -34]),
+    { stiffness: 120, damping: 24, mass: 0.4 }
+  );
+  const heroGlowY = useSpring(
+    useTransform(heroProgress, [0, 1], [0, prefersReducedMotion ? 0 : 120]),
+    { stiffness: 110, damping: 24, mass: 0.45 }
+  );
+  const heroGlowX = useSpring(
+    useTransform(heroProgress, [0, 1], [0, prefersReducedMotion ? 0 : -46]),
+    { stiffness: 110, damping: 24, mass: 0.45 }
+  );
+  const heroTextOpacity = useTransform(heroProgress, [0, 0.8], [1, 0.78]);
+  const heroVisualRotate = useTransform(
+    heroProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : -2]
+  );
 
   useEffect(() => {
     // Simple custom routing for 403 / 404 pages demonstration
@@ -212,7 +225,7 @@ const App: React.FC = () => {
     window.addEventListener("popstate", handleLocationChange);
     
     // Simulate Initial Custom Loader
-    const timer = setTimeout(() => setInitialLoading(false), 2050); // Beat 6 starts at 2050ms
+    const timer = setTimeout(() => setInitialLoading(false), 1650); // Faster exit since counter beat is removed
 
     document.documentElement.style.scrollBehavior = "smooth";
     return () => {
@@ -247,13 +260,29 @@ const App: React.FC = () => {
 
         <main id="main-content">
         {/* HERO SECTION */}
-        <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
+        <section ref={heroRef} className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20 pb-10">
+          <motion.div
+            aria-hidden="true"
+            style={{ y: heroGlowY, x: heroGlowX }}
+            className="pointer-events-none absolute -left-48 top-[16%] h-112 w-md rounded-full bg-[radial-gradient(circle,rgba(217,119,6,0.14)_0%,rgba(217,119,6,0.04)_35%,transparent_72%)] blur-3xl"
+          />
+          <motion.div
+            aria-hidden="true"
+            style={{ y: heroVisualY }}
+            className="pointer-events-none absolute -right-32 top-[12%] h-88 w-88 rounded-full bg-[radial-gradient(circle,rgba(24,24,27,0.08)_0%,transparent_72%)] blur-3xl"
+          />
+          <motion.div
+            aria-hidden="true"
+            style={{ y: heroFrameY }}
+            className="pointer-events-none absolute inset-x-[8%] top-[24%] hidden h-px bg-linear-to-r from-transparent via-[#d97706]/30 to-transparent md:block"
+          />
           <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch min-h-[400px] md:min-h-[500px]">
             
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
+              style={{ y: heroTextY, opacity: heroTextOpacity }}
               className="max-w-xl z-10"
             >
               <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold font-syne tracking-tighter leading-[1.05] mb-8 text-[#18181b]">
@@ -262,6 +291,18 @@ const App: React.FC = () => {
               <p className="text-base md:text-lg text-[#52525b] font-light leading-relaxed mb-10 max-w-md">
                 {HERO_SUB}
               </p>
+
+              <div className="flex flex-wrap gap-2 mb-10">
+                <span className="px-3 py-1.5 rounded-full bg-[#f5f3ee] border border-[#e4e2dc] text-[10px] font-bold uppercase tracking-[0.22em] text-[#444441]">
+                  Hooks that hold attention
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-[#18181b] text-[#FAFAF8] text-[10px] font-bold uppercase tracking-[0.22em]">
+                  Edits built to convert
+                </span>
+                <span className="px-3 py-1.5 rounded-full bg-[#faeeda] border border-[#f3d6a5] text-[10px] font-bold uppercase tracking-[0.22em] text-[#9a5808]">
+                  Personal brand storytelling
+                </span>
+              </div>
 
               {/* [FIX #1] Hero CTA buttons */}
               <div className="flex flex-wrap gap-3">
@@ -275,29 +316,99 @@ const App: React.FC = () => {
 
             </motion.div>
 
-            {/* Profile Picture with Tilt and Blend */}
+            {/* [IMPLEMENTATION] The Architectural Overlap */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
+              whileHover="hover"
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="relative flex justify-center md:justify-end perspective z-0"
+              style={{ y: heroVisualY, rotate: heroVisualRotate }}
+              className="relative flex justify-center md:justify-end z-0 md:ml-[-10%] md:w-[110%] h-full min-h-[400px] md:min-h-[600px]"
             >
-              <div className="relative w-full h-full rounded-2xl overflow-hidden hero-tilt border border-[#e4e2dc] min-h-[400px] md:min-h-[500px]">
-                 {/* Placeholder for Profile */}
-                 {/* [FIX #9] Branded fallback instead of random stock photo */}
-                 <img
-                   src="/profile/IMG_20260214_201237721_HDR_PORTRAIT.jpg"
-                   onError={(e) => {
-                     const target = e.target as HTMLImageElement;
-                     target.style.display = 'none';
-                     const fallback = target.parentElement?.querySelector('.avatar-fallback') as HTMLDivElement;
-                     if (fallback) fallback.style.display = 'flex';
-                   }}
-                   alt="Prince — Video Editor"
-                   className="w-full h-full object-cover blend-bg"
-                 />
-                 <div className="avatar-fallback w-full h-full bg-[#faeeda] items-center justify-center text-5xl font-syne font-bold text-[#d97706] absolute inset-0" style={{ display: 'none' }}>P</div>
-                 <div className="absolute inset-0 border border-white/20 rounded-2xl pointer-events-none"></div>
+              <div className="relative w-full h-full overflow-visible px-4 md:px-0">
+                 <motion.div
+                   animate={{ y: [0, -10, 0], rotate: [0, 1, 0] }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute -top-2 right-[2%] z-30 hidden rounded-2xl border border-[#18181b]/10 bg-[#18181b] px-4 py-3 text-[#FAFAF8] shadow-2xl md:block"
+                 >
+                   <div className="text-[10px] uppercase tracking-[0.22em] text-white/60">Current Mode</div>
+                   <div className="mt-1 font-syne text-xl font-bold leading-none">Cut. Hook. Sell.</div>
+                 </motion.div>
+
+                 <motion.div
+                   animate={{ y: [0, 12, 0] }}
+                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+                   className="absolute bottom-[12%] -left-2 z-30 hidden rounded-2xl border border-[#f3d6a5] bg-[#faeeda] px-4 py-4 shadow-xl md:block"
+                 >
+                   <div className="text-[10px] uppercase tracking-[0.22em] text-[#9a5808]">Identity</div>
+                   <div className="mt-2 font-syne text-2xl font-bold tracking-tight text-[#18181b]">Prince.</div>
+                   <div className="text-sm text-[#52525b]">Editor for brands that want response, not noise.</div>
+                 </motion.div>
+
+                 <div className="absolute left-[10%] top-[10%] hidden h-[72%] w-[72%] rounded-4xl border border-[#18181b]/10 bg-white/40 shadow-[0_45px_100px_rgba(24,24,27,0.08)] md:block" />
+
+                 <div className="absolute right-[8%] top-[16%] hidden h-[70%] w-[68%] rounded-4xl border border-[#d97706]/20 bg-linear-to-br from-[#fff7ed] via-[#FAFAF8] to-[#f5f3ee] shadow-[0_30px_70px_rgba(217,119,6,0.12)] md:block" />
+
+                 <div className="absolute left-[4%] top-[20%] z-20 hidden h-[52%] w-12 items-center justify-center rounded-full border border-[#e4e2dc] bg-[#FAFAF8]/90 text-[10px] font-bold uppercase tracking-[0.32em] text-[#71717a] md:flex">
+                   <span style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+                     Cinematic Retention Conversion
+                   </span>
+                 </div>
+
+                 <div className="absolute inset-x-[10%] bottom-[8%] z-30 hidden flex-wrap gap-2 md:flex">
+                   <span className="rounded-full border border-[#18181b]/10 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#18181b] backdrop-blur-md">
+                     Short-form editor
+                   </span>
+                   <span className="rounded-full border border-[#18181b]/10 bg-white/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#18181b] backdrop-blur-md">
+                     Strategy-led cuts
+                   </span>
+                   <span className="rounded-full border border-[#d97706]/25 bg-[#faeeda]/90 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-[#9a5808] backdrop-blur-md">
+                     Premium pacing
+                   </span>
+                 </div>
+
+                 <div className="absolute inset-[6%] z-10 overflow-hidden rounded-[2.25rem] border border-[#18181b]/10 bg-[#18181b] shadow-[0_50px_120px_rgba(24,24,27,0.22)] md:inset-[10%]">
+                   <div className="absolute inset-0 opacity-[0.08] pointer-events-none mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E")`, backgroundSize: '200px' }}></div>
+                   <div className="absolute inset-y-0 left-0 z-20 w-20 bg-linear-to-r from-[#18181b] via-[#18181b]/40 to-transparent pointer-events-none" />
+                   <div className="absolute inset-x-0 bottom-0 z-20 h-32 bg-linear-to-t from-[#18181b] via-[#18181b]/30 to-transparent pointer-events-none" />
+
+                   <motion.img
+                     src="/profile/IMG_20260214_201237721_HDR_PORTRAIT.jpg"
+                     variants={{
+                       initial: { filter: "grayscale(1) brightness(1.02) contrast(1.1)", opacity: 0.92, scale: 1.02 },
+                       hover: { filter: "grayscale(0) saturate(1) brightness(1) contrast(1)", opacity: 1, scale: 1.08 }
+                     }}
+                     initial="initial"
+                     whileHover="hover"
+                     transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                     alt="Prince — Video Editor"
+                     className="h-full w-full object-cover mix-blend-luminosity"
+                     onError={(e) => {
+                       const target = e.target as HTMLImageElement;
+                       target.style.display = 'none';
+                       const fallback = target.parentElement?.querySelector('.avatar-fallback') as HTMLDivElement;
+                       if (fallback) fallback.style.display = 'flex';
+                     }}
+                   />
+                   <div className="absolute inset-0 bg-linear-to-tr from-[#d97706]/18 via-transparent to-transparent z-10 pointer-events-none" />
+                   <div className="absolute left-6 top-6 z-20 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-[#FAFAF8] backdrop-blur-md">
+                     Video Editor
+                   </div>
+                   <div className="absolute right-6 top-6 z-20 rounded-full border border-white/10 bg-black/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
+                     Personal Brands
+                   </div>
+                   <div className="absolute bottom-0 left-0 right-0 z-20 p-6 md:p-8">
+                     <div className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/60">Built for retention and response</div>
+                     <div className="mt-3 font-syne text-4xl md:text-5xl font-bold leading-none tracking-tight text-[#FAFAF8]">
+                       PRINCE<span className="text-[#d97706]">.</span>
+                     </div>
+                     <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/75">
+                       I turn raw footage into persuasive short-form edits that feel premium before they ever feel loud.
+                     </p>
+                   </div>
+
+                   <div className="avatar-fallback absolute inset-0 items-center justify-center bg-[#faeeda] text-5xl font-syne font-bold text-[#d97706]" style={{ display: 'none' }}>P</div>
+                 </div>
               </div>
             </motion.div>
 
@@ -314,6 +425,7 @@ const App: React.FC = () => {
           </motion.div>
         </section>
 
+        {ENABLE_3D_REEL_CAROUSEL && <ExperimentalReelCarouselSection />}
         <ReelsSection />
         <ProcessSection />
 

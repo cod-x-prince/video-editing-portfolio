@@ -29,7 +29,7 @@
     "@types/node": "^22.19.17",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vercel/node": "^4.0.0",
+    "@vercel/node": "^5.8.1",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.10",
@@ -37,5 +37,13 @@
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "overrides": {
+    "ajv": "^8.17.2",
+    "minimatch": "^10.2.3",
+    "path-to-regexp": "^6.3.0",
+    "smol-toml": "^1.6.1",
+    "undici": "^6.24.0",
+    "esbuild": "^0.25.0"
   }
 }

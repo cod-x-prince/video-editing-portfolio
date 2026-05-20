@@ -10,37 +10,71 @@ interface ReelCardProps {
 export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isPosterLoaded, setIsPosterLoaded] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [pendingPlay, setPendingPlay] = useState(false);
+  const reelIndex = String(index + 1).padStart(2, "0");
 
-  const handleInteraction = async () => {
-    if (videoRef.current) {
+  const playLoadedVideo = async () => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    try {
+      video.muted = false;
+      await video.play();
+      setIsPlaying(true);
+    } catch (err) {
+      console.warn("Unmuted autoplay prevented. Falling back to muted.");
       try {
-        videoRef.current.muted = false; // play with sound as requested
-        await videoRef.current.play();
+        video.muted = true;
+        await video.play();
         setIsPlaying(true);
-      } catch (err) {
-        // Browser prevented unmuted autoplay, fallback to muted autoplay
-        console.warn("Unmuted autoplay prevented. Falling back to muted.");
-        if (videoRef.current) {
-          try {
-            videoRef.current.muted = true;
-            await videoRef.current.play();
-            setIsPlaying(true);
-          } catch (fallbackErr) {
-            console.error("Autoplay completely prevented.");
-          }
-        }
+      } catch (fallbackErr) {
+        console.error("Autoplay completely prevented.");
       }
     }
+
+    setPendingPlay(false);
+  };
+
+  const primeVideo = () => {
+    setShouldLoadVideo(true);
+  };
+
+  const requestPlayback = () => {
+    setShouldLoadVideo(true);
+
+    if (isVideoReady) {
+      void playLoadedVideo();
+      return;
+    }
+
+    setPendingPlay(true);
   };
 
   const stopInteraction = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-      videoRef.current.currentTime = 0;
+    setPendingPlay(false);
+
+    const video = videoRef.current;
+    if (!video) {
+      return;
     }
+
+    video.pause();
+    video.currentTime = 0;
+    setIsPlaying(false);
   };
+
+  useEffect(() => {
+    if (!shouldLoadVideo || !isVideoReady || !pendingPlay) {
+      return;
+    }
+
+    void playLoadedVideo();
+  }, [isVideoReady, pendingPlay, shouldLoadVideo]);
 
   return (
     <motion.div
@@ -49,48 +83,96 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`group relative aspect-9/16 rounded-xl overflow-hidden bg-[#e4e2dc] border border-[#e4e2dc] cursor-pointer`}
-      onMouseEnter={handleInteraction}
+      onMouseEnter={requestPlayback}
       onMouseLeave={stopInteraction}
-      onClick={handleInteraction} /* mobile support */
+      onFocus={primeVideo}
+      onClick={requestPlayback} /* mobile support */
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (isPlaying) stopInteraction();
+          else requestPlayback();
+        }
+      }}
+      tabIndex={0}
+      role="button"
+      aria-label={`Play video reel: ${reel.title}`}
       data-cursor="video"
     >
-      <video
-        ref={videoRef}
-        src={`${reel.videoUrl}#t=${reel.previewTime ?? 0.001}`}
-        poster={reel.posterUrl}
-        preload="metadata"
-        className={`w-full h-full object-cover transition-all duration-700 ease-out transform group-hover:scale-105 ${isLoaded ? "opacity-100" : "opacity-0"}`}
-        loop
-        playsInline
-        onLoadedData={() => setIsLoaded(true)}
+      <img
+        src={reel.cloudPosterUrl}
+        alt={`${reel.title} poster`}
+        loading={index < 2 ? "eager" : "lazy"}
+        decoding="async"
+        className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out ${
+          isPosterLoaded ? "opacity-100" : "opacity-0"
+        } ${!isPlaying ? "group-hover:scale-105" : ""}`}
+        onLoad={() => setIsPosterLoaded(true)}
       />
 
-      {/* Loading pulse before video loads */}
-      {!isLoaded && (
+      {shouldLoadVideo && (
+        <video
+          ref={videoRef}
+          src={reel.cloudVideoUrl}
+          preload="metadata"
+          className={`absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out transform group-hover:scale-105 ${
+            isVideoReady ? "opacity-100" : "opacity-0"
+          }`}
+          loop
+          playsInline
+          onLoadedData={() => setIsVideoReady(true)}
+        />
+      )}
+
+      {!isPosterLoaded && (
         <div className="absolute inset-0 bg-[#e4e2dc] animate-pulse" />
       )}
 
       <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
-      {/* Persistent Niche Badge */}
-      {reel.niche && (
-        <div className="absolute bottom-4 left-4 z-10">
-          <span className="bg-[#d97706] text-[#18181b] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
-            {reel.niche}
-          </span>
+      <div className="absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4 text-white">
+        <div className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] backdrop-blur-md">
+          {reelIndex}
         </div>
-      )}
+        <div className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-md">
+          {isPlaying ? "Playing" : reel.duration}
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 z-10 p-4 pt-20 text-white transition-opacity duration-300 group-hover:opacity-0">
+        <div className="flex flex-col items-start gap-2">
+          {reel.niche && (
+            <span className="bg-[#d97706] text-[#18181b] text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
+              {reel.niche}
+            </span>
+          )}
+          <p className="text-[10px] uppercase tracking-[0.22em] text-white/70">
+            {reel.client}
+          </p>
+          <h3 className="max-w-[92%] text-base md:text-lg font-syne font-bold tracking-tight leading-tight">
+          {reel.title}
+          </h3>
+        </div>
+      </div>
 
       {/* [FIX #6] Description overlay on hover */}
       {reel.description && (
-        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none pb-12">
-          <p className="text-white text-sm mt-1 leading-relaxed">
+        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
+          <div className="max-w-[88%] rounded-2xl border border-white/10 bg-black/45 p-4 backdrop-blur-sm">
+            <p className="text-[10px] uppercase tracking-[0.22em] text-white/65">
+              {reel.client}
+            </p>
+            <h3 className="mt-2 text-lg font-syne font-bold tracking-tight text-white">
+              {reel.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/90">
             {reel.description}
-          </p>
+            </p>
+          </div>
         </div>
       )}
 
-      {!isPlaying && isLoaded && (
+      {!isPlaying && (
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
             <svg

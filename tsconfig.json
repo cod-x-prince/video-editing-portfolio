@@ -13,7 +13,8 @@
     ],
     "skipLibCheck": true,
     "types": [
-      "node"
+      "node",
+      "vite/client"
     ],
     "moduleResolution": "Bundler",
     "isolatedModules": true,
@@ -27,5 +28,9 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": [
+    "dist",
+    "dist-ssr"
+  ]
 }
