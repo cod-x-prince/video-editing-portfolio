@@ -1,37 +1,55 @@
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
-export const Navigation: React.FC = () => {
+type NavigationProps = {
+  onOpenContact: () => void;
+};
+
+export const Navigation: React.FC<NavigationProps> = ({ onOpenContact }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
-    { href: '#reels', label: 'WORK' },
-    { href: '#process', label: 'PROCESS' },
-    { href: '#fit', label: 'FIT' },
-    { href: '#contact', label: "LET'S TALK" },
+    { href: "#reels", label: "WORK" },
+    { href: "#process", label: "PROCESS" },
+    { href: "#fit", label: "FIT" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#FAFAF8]/90 backdrop-blur-md border-b border-[#e4e2dc]">
-      <div className="px-6 py-4 flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#FAFAF8]/92 backdrop-blur-lg border-b border-[#e5dfd5]">
+      <div className="px-6 py-3.5 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-[#18181b] font-syne font-bold text-xl tracking-tighter">
-          Prince
-          <span className="text-[#d97706] text-2xl leading-none">.</span>
+        <div className="text-[#18181b] font-syne font-bold text-lg tracking-[-0.02em]">
+          Parmbeer
+          <span className="text-[#c4871f] text-xl leading-none">.</span>
         </div>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 text-[12px] font-medium font-inter text-[#52525b]">
+        <div className="hidden md:flex items-center gap-5 text-[11px] font-semibold tracking-[0.08em] text-[#71717a]">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-[#18181b] transition-colors">
+            <a
+              key={link.href}
+              href={link.href}
+              className="hover:text-[#18181b] transition-colors py-1"
+            >
               {link.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={onOpenContact}
+            className="hover:text-[#18181b] transition-colors"
+          >
+            LET'S TALK
+          </button>
           {/* [FIX #8] Availability Pill as link to contact */}
-          <a href="#contact" className="flex items-center gap-2 ml-4 px-3 py-1.5 rounded-full bg-[#f1efe8] border border-[#e4e2dc] text-[10px] uppercase tracking-wider text-[#444441] hover:bg-[#e4e2dc] transition-colors cursor-pointer">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          <button
+            type="button"
+            onClick={onOpenContact}
+            className="ml-3 flex items-center gap-1.5 rounded-full border border-[#e5dfd5] bg-[#f5f3ee] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-[#5a5650] transition-colors hover:bg-[#ebe8e0] hover:border-[#c4871f]/25"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c4871f] animate-pulse"></span>
             2 spots open this month
-          </a>
+          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -57,11 +75,28 @@ export const Navigation: React.FC = () => {
               {link.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              setMobileOpen(false);
+              onOpenContact();
+            }}
+            className="py-2 text-left text-sm font-medium text-[#52525b] transition-colors hover:text-[#18181b]"
+          >
+            LET'S TALK
+          </button>
           {/* [FIX #8] Availability Pill as link */}
-          <a href="#contact" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f1efe8] border border-[#e4e2dc] text-[10px] uppercase tracking-wider text-[#444441] w-fit hover:bg-[#e4e2dc] transition-colors cursor-pointer">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          <button
+            type="button"
+            onClick={() => {
+              setMobileOpen(false);
+              onOpenContact();
+            }}
+            className="flex w-fit items-center gap-2 rounded-full border border-[#e4e2dc] bg-[#f1efe8] px-3 py-1.5 text-[10px] uppercase tracking-wider text-[#444441] transition-colors hover:bg-[#e4e2dc]"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#c4871f] animate-pulse"></span>
             2 spots open this month
-          </a>
+          </button>
         </div>
       )}
     </nav>

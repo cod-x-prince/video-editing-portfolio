@@ -54,6 +54,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   };
 
+  const minBookingDate = new Date().toISOString().slice(0, 10);
+
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -97,6 +99,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           >
             <button
               onClick={onClose}
+              aria-label="Close booking form"
               className="absolute top-6 right-6 text-[#52525b] hover:text-[#18181b] transition-colors"
             >
               <X size={20} />
@@ -156,6 +159,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         id="date"
                         name="date"
                         type="date"
+                        min={minBookingDate}
                         required
                         className="w-full bg-[#f5f3ee] border border-[#e4e2dc] rounded-lg px-4 py-2 text-[#18181b] focus:outline-none focus:border-[#d97706] appearance-none"
                       />

@@ -34,22 +34,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({
       });
 
       if (!response.ok) {
-        // If 404 it means we're on local dev without Vercel serverless
-        if (response.status === 404) {
-          throw new Error("Contact API is not available in local dev. Deploy to Vercel or use `npx vercel dev` to test.");
-        }
-        throw new Error("Failed to send message");
+        throw new Error("message_failed");
       }
 
       setStatus("success");
     } catch (error) {
-      console.error(error);
       setStatus("error");
-      setErrorMessage(
-        error instanceof Error && error.message.includes("local dev")
-          ? error.message
-          : "Something went wrong. Please try again."
-      );
+      setErrorMessage("The form could not send right now. Email me directly and I will still see it.");
     }
   };
 
@@ -97,6 +88,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
           >
             <button
               onClick={onClose}
+              aria-label="Close contact form"
               className="absolute top-6 right-6 text-[#52525b] hover:text-[#18181b] transition-colors"
             >
               <X size={20} />
@@ -185,9 +177,17 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 </div>
 
                 {status === "error" && (
-                  <div className="flex items-center gap-2 text-[#a32d2d] text-sm bg-[#fcebeb] p-3 rounded-lg border border-[#fcebeb]">
-                    <AlertCircle size={16} />
-                    {errorMessage}
+                  <div className="rounded-lg border border-[#f3c7c7] bg-[#fff1f1] p-3 text-sm text-[#8a2020]">
+                    <div className="flex items-start gap-2">
+                      <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                    <a
+                      href="mailto:parmbeeredits@gmail.com?subject=Project%20Inquiry%20-%20Parmbeer%20Portfolio"
+                      className="mt-3 inline-flex font-bold text-[#18181b] underline decoration-[#d97706] underline-offset-4"
+                    >
+                      Email parmbeeredits@gmail.com
+                    </a>
                   </div>
                 )}
 

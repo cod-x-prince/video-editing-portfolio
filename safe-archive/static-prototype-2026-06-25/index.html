@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Prince. Video editing portfolio built around retention, pacing, and persuasive edits."
+    />
+    <title>Prince. | Video Editor</title>
+    <link rel="icon" href="./public/favicon.png" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="intro" aria-hidden="true">
+      <a class="brand intro-brand" href="#top">Prince<span>.</span></a>
+      <div class="hello-stage">
+        <p class="hello-kicker">First impression loading</p>
+        <h1 class="hello-word" id="helloWord">Hello</h1>
+        <div class="ink-dot"></div>
+      </div>
+    </div>
+
+    <main id="top" class="site-shell">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top">Prince<span>.</span></a>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#fit">Fit</a>
+          <a href="#contact">Let's talk</a>
+        </div>
+        <p class="availability">2 spots open this month</p>
+      </nav>
+
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">Video editor for personal brands</p>
+          <h1 id="heroTitle">Your viewers don't need to be entertained, they need to be convinced.</h1>
+          <p class="hero-subcopy">
+            Cuts with a hook, captions with intent, pacing with pressure, and a final edit that makes
+            people stay long enough to care.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#work">Watch the edits</a>
+            <a class="secondary-action" href="#contact">Book a call</a>
+          </div>
+        </div>
+
+        <div class="hero-media" id="heroMedia">
+          <div class="mode-pill">
+            <span>Current mode</span>
+            <strong>Cut. Hook. Sell.</strong>
+          </div>
+          <div class="portrait-rail">Cinematic retention conversion</div>
+          <figure class="portrait-shell">
+            <div class="ink-reveal" aria-hidden="true"></div>
+            <img
+              src="./public/profile/IMG_20260214_201237721_HDR_PORTRAIT.jpg"
+              alt="Prince looking toward a screen in warm cinematic lighting"
+            />
+            <figcaption>
+              <span>Video editor</span>
+              <span>Personal brands</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="quick-strip" id="work" aria-label="Editing focus areas">
+        <span>Hooks</span>
+        <span>Captions</span>
+        <span>Sound feel</span>
+        <span>Retention pacing</span>
+        <span>Color polish</span>
+      </section>
+    </main>
+
+    <aside class="music-player" id="musicPlayer" aria-label="Music player">
+      <div class="track-art" aria-hidden="true">
+        <span></span>
+      </div>
+      <div class="track-meta">
+        <span class="track-status" id="trackStatus">Playlist ready</span>
+        <strong id="trackTitle">Drop your music</strong>
+      </div>
+      <div class="player-controls">
+        <button type="button" id="prevTrack" aria-label="Previous track">‹</button>
+        <button type="button" id="toggleMusic" class="play-toggle" aria-label="Play music">▶</button>
+        <button type="button" id="nextTrack" aria-label="Next track">›</button>
+      </div>
+      <button type="button" class="mute-toggle" id="muteMusic" aria-label="Mute music">Vol</button>
+      <audio id="audioPlayer" preload="none"></audio>
+    </aside>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

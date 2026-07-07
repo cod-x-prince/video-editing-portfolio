@@ -5,9 +5,10 @@ import { Reel } from "../types";
 interface ReelCardProps {
   reel: Reel;
   index: number;
+  onOpen: (reel: Reel) => void;
 }
 
-export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
+export const ReelCard: React.FC<ReelCardProps> = ({ reel, index, onOpen }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPosterLoaded, setIsPosterLoaded] = useState(false);
@@ -23,18 +24,11 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
     }
 
     try {
-      video.muted = false;
+      video.muted = true;
       await video.play();
       setIsPlaying(true);
     } catch (err) {
-      console.warn("Unmuted autoplay prevented. Falling back to muted.");
-      try {
-        video.muted = true;
-        await video.play();
-        setIsPlaying(true);
-      } catch (fallbackErr) {
-        console.error("Autoplay completely prevented.");
-      }
+      setIsPlaying(false);
     }
 
     setPendingPlay(false);
@@ -86,17 +80,16 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
       onMouseEnter={requestPlayback}
       onMouseLeave={stopInteraction}
       onFocus={primeVideo}
-      onClick={requestPlayback} /* mobile support */
+      onClick={() => onOpen(reel)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          if (isPlaying) stopInteraction();
-          else requestPlayback();
+          onOpen(reel);
         }
       }}
       tabIndex={0}
       role="button"
-      aria-label={`Play video reel: ${reel.title}`}
+      aria-label={`Open video reel: ${reel.title}`}
       data-cursor="video"
     >
       <img
@@ -135,7 +128,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
           {reelIndex}
         </div>
         <div className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-md">
-          {isPlaying ? "Playing" : reel.duration}
+          {isPlaying ? "Preview" : reel.duration}
         </div>
       </div>
 
@@ -150,7 +143,7 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
             {reel.client}
           </p>
           <h3 className="max-w-[92%] text-base md:text-lg font-syne font-bold tracking-tight leading-tight">
-          {reel.title}
+            {reel.title}
           </h3>
         </div>
       </div>
@@ -160,13 +153,13 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 pointer-events-none">
           <div className="max-w-[88%] rounded-2xl border border-white/10 bg-black/45 p-4 backdrop-blur-sm">
             <p className="text-[10px] uppercase tracking-[0.22em] text-white/65">
-              {reel.client}
+              What I fixed
             </p>
             <h3 className="mt-2 text-lg font-syne font-bold tracking-tight text-white">
               {reel.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-white/90">
-            {reel.description}
+              {reel.description}
             </p>
           </div>
         </div>
@@ -187,6 +180,11 @@ export const ReelCard: React.FC<ReelCardProps> = ({ reel, index }) => {
           </div>
         </div>
       )}
+      <div className="absolute inset-x-4 bottom-4 z-20 opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100">
+        <div className="rounded-full border border-white/20 bg-white/90 px-4 py-2 text-center text-xs font-bold uppercase tracking-[0.18em] text-[#18181b] shadow-lg backdrop-blur-md">
+          Watch full edit
+        </div>
+      </div>
     </motion.div>
   );
 };

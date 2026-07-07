@@ -1,0 +1,3007 @@
+{
+  "timestamp": "2026-07-07T02:08:42.485Z",
+  "files": {
+    "total": 104,
+    "byType": {
+      ".log": 4,
+      ".example": 1,
+      "": 1,
+      ".json": 7,
+      ".ts": 19,
+      ".js": 9,
+      ".tsx": 21,
+      ".css": 2,
+      ".html": 2,
+      ".md": 10,
+      ".svg": 1,
+      ".png": 2,
+      ".mp3": 3,
+      ".jpg": 8,
+      ".mp4": 14
+    }
+  },
+  "security": {
+    "secretsFound": [
+      {
+        "file": ".env.example",
+        "line": 6,
+        "type": "Generic API Key",
+        "snippet": "EMAIL_API_KEY=your_resend_api_key_here..."
+      },
+      {
+        "file": ".env.example",
+        "line": 2,
+        "type": "Generic Secret",
+        "snippet": "GOOGLE_CLIENT_SECRET=your_google_client_secret_her..."
+      },
+      {
+        "file": ".gitignore",
+        "line": 31,
+        "type": "Generic Secret",
+        "snippet": "# Archived scan artifacts can contain copied secre..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 29,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"EMAIL_API_KEY=your_resend_api_key_here..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 47,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"EMAIL_API_KEY=your_rese..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 53,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"EM..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 77,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"//..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 89,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"if (!process.env.EMAIL_..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 95,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"console.error(\\\\\\\"Missi..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 101,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"const apiKey = process...."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 107,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"if (!apiKey) {...\\\"...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 113,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"x-api-key\\\\\\\": apiK..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 119,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"ANTHROPIC_API_KEY=sk-an..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 125,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- Detected `GEMINI_API_..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 131,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- Detected `GEMINI_API_..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 137,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"// 'process.env.API_KEY..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 143,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"// 'process.env.GEMINI_..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1271,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"if (!process.env.EMAIL_API_KEY || !pro..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1277,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"console.error(\\\"Missing EMAIL_API_KEY ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1289,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"const apiKey = process.env.ANTHROPIC_A..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1295,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"if (!apiKey) {...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1307,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"\\\"x-api-key\\\": apiKey,...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1313,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"ANTHROPIC_API_KEY=sk-ant-......\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1325,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"- Detected `GEMINI_API_KEY` exposure i..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1355,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"- Detected `GEMINI_API_KEY` exposure i..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1511,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"// 'process.env.API_KEY': JSON.stringi..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1517,
+        "type": "Generic API Key",
+        "snippet": "\"snippet\": \"// 'process.env.GEMINI_API_KEY': JSON...."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 24,
+        "type": "Generic Secret",
+        "snippet": "\"secretsFound\": [..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 34,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 35,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"GOOGLE_CLIENT_SECRET=your_google_clien..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 40,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 148,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 149,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"secretsFound\\\": [...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 154,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 155,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 160,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 161,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"GOOGLE_CLIENT_SECRET=yo..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 166,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 167,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 172,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 173,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 178,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 179,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"secretsFound\\\\\\\": [..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 184,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 185,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 190,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 191,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 196,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 197,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 202,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 203,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"GO..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 208,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 209,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 214,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 215,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 220,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 221,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 226,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 227,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 232,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 233,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 238,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 239,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 244,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 245,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 250,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 251,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 256,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 257,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 262,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 263,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 268,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 269,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 274,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 275,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 280,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 281,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 286,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 287,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 292,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 293,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 298,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 304,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 305,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 310,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 311,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 316,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 317,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 322,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 323,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 328,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 329,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 334,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 335,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 340,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 341,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 346,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 347,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 352,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 353,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 358,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 359,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 364,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 365,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 370,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 371,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 376,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 377,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 382,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 388,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 389,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 394,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 395,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 400,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 401,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 406,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 407,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"se..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 412,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 413,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 418,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 419,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 424,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 425,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 430,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 436,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 437,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 442,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 443,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 448,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 449,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 454,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 455,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"co..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 460,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 461,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 466,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 467,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 472,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 473,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 478,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 484,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 485,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 490,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 491,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 496,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 497,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 502,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 503,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"SE..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 508,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 509,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 514,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 515,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 520,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 521,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 526,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 527,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"re..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 532,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 533,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 538,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 539,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 544,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 545,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 550,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 551,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 556,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 557,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 562,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 563,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 568,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 569,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 574,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 580,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 581,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 586,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 587,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 592,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 593,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 598,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 604,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 605,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 610,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 611,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 616,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 617,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 622,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 623,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"GO..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 628,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 629,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 634,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 635,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 640,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 641,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 646,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 647,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"GO..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 652,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 653,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 658,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 659,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 664,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 665,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 670,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 671,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"se..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 676,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 677,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 682,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 683,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 688,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 689,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 694,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 700,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 701,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 706,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 707,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 712,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 713,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 718,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 719,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"co..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 724,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 725,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 730,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 731,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 736,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 737,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 742,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 748,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 749,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 754,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 755,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 760,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 761,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 766,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 767,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"SE..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 772,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 773,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 778,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 779,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 784,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 785,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 790,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 791,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"re..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 796,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 797,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 802,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 803,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 808,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 809,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 814,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 815,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"- ..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 820,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 821,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 826,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 827,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 832,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 833,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 838,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 844,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 845,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 850,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 851,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 856,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 857,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 862,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 868,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 869,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 874,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 875,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 880,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 881,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 886,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 887,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"GO..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 892,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 893,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 898,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 899,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"type\\\\\\\": \\\\\\\"Gener..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 904,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 905,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 910,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 911,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"snippet\\\\\\\": \\\\\\\"GO..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 916,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 917,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 922,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 923,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- **Secrets Found**: 30..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 928,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 929,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 934,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 935,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- Secret leaks (API key..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 940,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 941,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 946,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 947,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 952,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 953,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"1.  **Zero exposed secr..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 958,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 959,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 964,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 965,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- **Secrets Found**: 30..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 970,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 971,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 976,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 977,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- Secret leaks (API key..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 982,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 983,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 988,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 989,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 994,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 995,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"1.  **Zero exposed secr..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1000,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1001,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1006,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1007,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"secretsFound: [],...\\\"...."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1012,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1013,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1018,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1019,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"// 1. File Stats & Secr..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1024,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1025,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1030,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1031,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"const SECRET_PATTERNS =..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1036,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1037,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1042,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1043,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"{ name: \\\\\\\"Generic Sec..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1048,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1049,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1054,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1055,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"SECRET_PATTERNS.forEach..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1060,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1061,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1066,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1067,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"report.security.secrets..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1072,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1073,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1078,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1079,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- **Secrets Found**: ${..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1084,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1085,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1090,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1091,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"${analysis.security?.se..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1096,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1097,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1102,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1103,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"GOOGLE_CLIENT_SECRE..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1108,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1109,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1114,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1115,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"GOOGLE_CLIENT_SECRET,....."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1120,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1121,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1126,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1127,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"GOOGLE_CLIENT_SECRET,....."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1132,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1133,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1138,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1139,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"secretsFound: [],...\\\"...."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1144,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1145,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1150,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1151,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"// 1. File Stats & Secr..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1156,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1157,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1162,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1163,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"const SECRET_PATTERNS =..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1168,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1169,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1174,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1175,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"{ name: \\\\\\\"Generic Sec..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1180,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1181,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1186,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1187,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"SECRET_PATTERNS.forEach..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1192,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1193,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1198,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1199,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"report.security.secrets..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1204,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1205,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1210,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1211,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"- **Secrets Found**: ${..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1216,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1217,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1222,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1223,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"${analysis.security?.se..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1228,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1229,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1234,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1235,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"\\\\\\\"GOOGLE_CLIENT_SECRE..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1240,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1241,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1246,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1247,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"GOOGLE_CLIENT_SECRET,....."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1252,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1253,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"type\\\": \\\"Generic Secret\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1258,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1259,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"snippet\\\": \\\"GOOGLE_CLIENT_SECRET,....."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1318,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1319,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- **Secrets Found**: 30...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1330,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1331,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- Secret leaks (API keys, tokens)....\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1336,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1342,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1343,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"1.  **Zero exposed secrets.**...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1348,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1349,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- **Secrets Found**: 30...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1360,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1361,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- Secret leaks (API keys, tokens)....\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1366,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1372,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1373,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"1.  **Zero exposed secrets.**...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1378,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1379,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"secretsFound: [],...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1384,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1385,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"// 1. File Stats & Secret Scanning...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1390,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1391,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"const SECRET_PATTERNS = [...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1396,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1397,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"{ name: \\\"Generic Secret\\\", pattern: /..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1402,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1403,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"SECRET_PATTERNS.forEach(({ name, patte..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1408,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1409,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"report.security.secretsFound.push({......"
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1414,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1415,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- **Secrets Found**: ${analysis.securi..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1420,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1421,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"${analysis.security?.secretsFound?.len..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1426,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1427,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"GOOGLE_CLIENT_SECRET\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1432,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1433,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"GOOGLE_CLIENT_SECRET,...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1438,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1439,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"GOOGLE_CLIENT_SECRET,...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1444,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1445,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"secretsFound: [],...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1450,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1451,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"// 1. File Stats & Secret Scanning...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1456,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1457,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"const SECRET_PATTERNS = [...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1462,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1463,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"{ name: \\\"Generic Secret\\\", pattern: /..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1468,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1469,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"SECRET_PATTERNS.forEach(({ name, patte..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1474,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1475,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"report.security.secretsFound.push({......"
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1480,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1481,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"- **Secrets Found**: ${analysis.securi..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1486,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1487,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"${analysis.security?.secretsFound?.len..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1492,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1493,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"\\\"GOOGLE_CLIENT_SECRET\\\",...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1498,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1499,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"GOOGLE_CLIENT_SECRET,...\"..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1504,
+        "type": "Generic Secret",
+        "snippet": "\"type\": \"Generic Secret\",..."
+      },
+      {
+        "file": "analysis-report.json",
+        "line": 1505,
+        "type": "Generic Secret",
+        "snippet": "\"snippet\": \"GOOGLE_CLIENT_SECRET,...\"..."
+      },
+      {
+        "file": "api\\contact.ts",
+        "line": 5,
+        "type": "Generic API Key",
+        "snippet": "const resend = new Resend(process.env.EMAIL_API_KE..."
+      },
+      {
+        "file": "api\\contact.ts",
+        "line": 131,
+        "type": "Generic API Key",
+        "snippet": "if (!process.env.EMAIL_API_KEY || !process.env.OWN..."
+      },
+      {
+        "file": "api\\contact.ts",
+        "line": 132,
+        "type": "Generic API Key",
+        "snippet": "console.error(\"Missing EMAIL_API_KEY or OWNER_EMAI..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\chat.ts",
+        "line": 5,
+        "type": "Generic API Key",
+        "snippet": "// Vercel serverless function (Node runtime). ANTH..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\chat.ts",
+        "line": 53,
+        "type": "Generic API Key",
+        "snippet": "const apiKey = process.env.ANTHROPIC_API_KEY;..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\chat.ts",
+        "line": 54,
+        "type": "Generic API Key",
+        "snippet": "if (!apiKey) {..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\chat.ts",
+        "line": 55,
+        "type": "Generic API Key",
+        "snippet": "res.status(500).json({ error: \"Server misconfigure..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\chat.ts",
+        "line": 83,
+        "type": "Generic API Key",
+        "snippet": "\"x-api-key\": apiKey,..."
+      },
+      {
+        "file": "safe-archive\\chatbot-archive-2026-07-07\\INTEGRATION.md",
+        "line": 23,
+        "type": "Generic API Key",
+        "snippet": "ANTHROPIC_API_KEY=sk-ant-......"
+      },
+      {
+        "file": "safe-archive\\legacy-docs\\2026-01-18.md",
+        "line": 9,
+        "type": "Generic Secret",
+        "snippet": "- **Secrets Found**: 30..."
+      },
+      {
+        "file": "safe-archive\\legacy-docs\\V2.md",
+        "line": 21,
+        "type": "Generic API Key",
+        "snippet": "- Detected `GEMINI_API_KEY` exposure in `vite.conf..."
+      },
+      {
+        "file": "safe-archive\\legacy-docs\\V2.md",
+        "line": 17,
+        "type": "Generic Secret",
+        "snippet": "- Secret leaks (API keys, tokens)...."
+      },
+      {
+        "file": "safe-archive\\legacy-docs\\V2.md",
+        "line": 22,
+        "type": "Generic Secret",
+        "snippet": "- **Fix**: Removed the insecure `define` block, en..."
+      },
+      {
+        "file": "safe-archive\\legacy-docs\\V2.md",
+        "line": 103,
+        "type": "Generic Secret",
+        "snippet": "1.  **Zero exposed secrets.**..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\safe-archive\\legacy-docs\\2026-01-18.md",
+        "line": 9,
+        "type": "Generic Secret",
+        "snippet": "- **Secrets Found**: 30..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\safe-archive\\legacy-docs\\V2.md",
+        "line": 21,
+        "type": "Generic API Key",
+        "snippet": "- Detected `GEMINI_API_KEY` exposure in `vite.conf..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\safe-archive\\legacy-docs\\V2.md",
+        "line": 17,
+        "type": "Generic Secret",
+        "snippet": "- Secret leaks (API keys, tokens)...."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\safe-archive\\legacy-docs\\V2.md",
+        "line": 22,
+        "type": "Generic Secret",
+        "snippet": "- **Fix**: Removed the insecure `define` block, en..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\safe-archive\\legacy-docs\\V2.md",
+        "line": 103,
+        "type": "Generic Secret",
+        "snippet": "1.  **Zero exposed secrets.**..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 17,
+        "type": "Generic Secret",
+        "snippet": "secretsFound: [],..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 51,
+        "type": "Generic Secret",
+        "snippet": "// 1. File Stats & Secret Scanning..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 53,
+        "type": "Generic Secret",
+        "snippet": "const SECRET_PATTERNS = [..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 55,
+        "type": "Generic Secret",
+        "snippet": "{ name: \"Generic Secret\", pattern: /secret/i },..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 67,
+        "type": "Generic Secret",
+        "snippet": "SECRET_PATTERNS.forEach(({ name, pattern }) => {..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\analyze.js",
+        "line": 75,
+        "type": "Generic Secret",
+        "snippet": "report.security.secretsFound.push({..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\daily-report.js",
+        "line": 50,
+        "type": "Generic Secret",
+        "snippet": "- **Secrets Found**: ${analysis.security?.secretsF..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\daily-report.js",
+        "line": 51,
+        "type": "Generic Secret",
+        "snippet": "${analysis.security?.secretsFound?.length > 0 ? \">..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\diagnose-calendar.ts",
+        "line": 67,
+        "type": "Generic Secret",
+        "snippet": "\"GOOGLE_CLIENT_SECRET\",..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\diagnose-calendar.ts",
+        "line": 93,
+        "type": "Generic Secret",
+        "snippet": "GOOGLE_CLIENT_SECRET,..."
+      },
+      {
+        "file": "safe-archive\\nested-project-residue-2026-06-25\\scripts\\diagnose-calendar.ts",
+        "line": 100,
+        "type": "Generic Secret",
+        "snippet": "GOOGLE_CLIENT_SECRET,..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 17,
+        "type": "Generic Secret",
+        "snippet": "secretsFound: [],..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 51,
+        "type": "Generic Secret",
+        "snippet": "// 1. File Stats & Secret Scanning..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 53,
+        "type": "Generic Secret",
+        "snippet": "const SECRET_PATTERNS = [..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 55,
+        "type": "Generic Secret",
+        "snippet": "{ name: \"Generic Secret\", pattern: /secret/i },..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 67,
+        "type": "Generic Secret",
+        "snippet": "SECRET_PATTERNS.forEach(({ name, pattern }) => {..."
+      },
+      {
+        "file": "scripts\\analyze.js",
+        "line": 75,
+        "type": "Generic Secret",
+        "snippet": "report.security.secretsFound.push({..."
+      },
+      {
+        "file": "scripts\\daily-report.js",
+        "line": 50,
+        "type": "Generic Secret",
+        "snippet": "- **Secrets Found**: ${analysis.security?.secretsF..."
+      },
+      {
+        "file": "scripts\\daily-report.js",
+        "line": 51,
+        "type": "Generic Secret",
+        "snippet": "${analysis.security?.secretsFound?.length > 0 ? \">..."
+      },
+      {
+        "file": "scripts\\diagnose-calendar.ts",
+        "line": 67,
+        "type": "Generic Secret",
+        "snippet": "\"GOOGLE_CLIENT_SECRET\",..."
+      },
+      {
+        "file": "scripts\\diagnose-calendar.ts",
+        "line": 93,
+        "type": "Generic Secret",
+        "snippet": "GOOGLE_CLIENT_SECRET,..."
+      },
+      {
+        "file": "scripts\\diagnose-calendar.ts",
+        "line": 100,
+        "type": "Generic Secret",
+        "snippet": "GOOGLE_CLIENT_SECRET,..."
+      },
+      {
+        "file": "vite.config.ts",
+        "line": 15,
+        "type": "Generic API Key",
+        "snippet": "// 'process.env.API_KEY': JSON.stringify(env.GEMIN..."
+      },
+      {
+        "file": "vite.config.ts",
+        "line": 16,
+        "type": "Generic API Key",
+        "snippet": "// 'process.env.GEMINI_API_KEY': JSON.stringify(en..."
+      }
+    ],
+    "envIssues": []
+  },
+  "typeCheck": {
+    "passed": true,
+    "output": "Passed"
+  },
+  "dependencies": {
+    "vulnerabilities": 7,
+    "summary": {
+      "info": 0,
+      "low": 1,
+      "moderate": 6,
+      "high": 0,
+      "critical": 0,
+      "total": 7
+    }
+  }
+}

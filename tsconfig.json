@@ -31,6 +31,8 @@
   },
   "exclude": [
     "dist",
-    "dist-ssr"
+    "dist-ssr",
+    "safe-archive",
+    "node_modules"
   ]
 }

@@ -6,15 +6,20 @@ export const CustomCursor: React.FC = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth the mouse values with lower stiffness and slightly higher damping to eliminate jitter
-  const springX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.1 });
-  const springY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.1 });
+  // Optimized spring parameters for snappy, zero-lag cursor response
+  const springX = useSpring(mouseX, { stiffness: 280, damping: 24, mass: 0.08 });
+  const springY = useSpring(mouseY, { stiffness: 280, damping: 24, mass: 0.08 });
 
   const [cursorState, setCursorState] = useState<'default' | 'hover_link' | 'hover_video'>('default');
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    // Detect touch device
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsTouchDevice(isTouch);
+
+    if (prefersReducedMotion || isTouch) return;
 
     document.body.classList.add('hide-cursor');
 
@@ -22,7 +27,6 @@ export const CustomCursor: React.FC = () => {
       // Offset by half size (24px) to center the 48px cursor
       mouseX.set(e.clientX - 24);
       mouseY.set(e.clientY - 24);
-      if (!isVisible) setIsVisible(true);
     };
 
     const handleMouseLeave = () => setIsVisible(false);
@@ -46,6 +50,9 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
+    // Initial check for visibility on load
+    setIsVisible(true);
+
     return () => {
       document.body.classList.remove('hide-cursor');
       window.removeEventListener('mousemove', handleMouseMove);
@@ -53,9 +60,9 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [prefersReducedMotion, mouseX, mouseY, isVisible]);
+  }, [prefersReducedMotion, mouseX, mouseY]);
 
-  if (prefersReducedMotion) return null;
+  if (prefersReducedMotion || isTouchDevice) return null;
 
   return (
     <motion.div
@@ -64,6 +71,7 @@ export const CustomCursor: React.FC = () => {
         y: springY,
         width: 48,
         height: 48,
+        zIndex: 100000, // Explicitly float on the absolute top of everything
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden"
       }}
@@ -72,8 +80,8 @@ export const CustomCursor: React.FC = () => {
         opacity: isVisible ? 1 : 0,
         scale: cursorState === 'hover_link' ? 1.8 : cursorState === 'hover_video' ? 2.2 : 1,
       }}
-      transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
-      className="pointer-events-none fixed top-0 left-0 z-9999 flex items-center justify-center rounded-full bg-[#d97706] mix-blend-multiply transform-gpu will-change-transform"
+      transition={{ type: 'spring', stiffness: 280, damping: 24, mass: 0.08 }}
+      className="custom-cursor pointer-events-none fixed top-0 left-0 flex items-center justify-center rounded-full bg-[#c4871f] mix-blend-multiply transform-gpu will-change-transform"
     >
       {cursorState === 'hover_video' && (
         <motion.span 
