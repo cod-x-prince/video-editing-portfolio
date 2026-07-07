@@ -125,7 +125,10 @@ const App: React.FC = () => {
     setMusicPlayerVisible(true);
     setInitialLoading(false);
     setMusicPlayerDocked(true);
-    window.dispatchEvent(new CustomEvent("portfolio:start-music"));
+    // Wait for the hero section entrance animations to end (1.5s after reveal)
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("portfolio:start-music"));
+    }, 1500);
   };
 
   useEffect(() => {
@@ -145,7 +148,12 @@ const App: React.FC = () => {
     timers.push(
       setTimeout(() => {
         setInitialLoading(false);
-        window.dispatchEvent(new CustomEvent("portfolio:start-music"));
+        // Wait for the hero section entrance animations to end (1.5s after reveal)
+        timers.push(
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent("portfolio:start-music"));
+          }, 1500)
+        );
       }, heroRevealDelay),
     );
     timers.push(setTimeout(() => setMusicPlayerDocked(true), playerDockDelay));

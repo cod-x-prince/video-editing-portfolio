@@ -169,7 +169,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const playTrack = useCallback(async () => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio) return false;
 
     try {
       if (
@@ -185,10 +185,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
       setStatus("Now playing");
       fadeAudio();
       startWaveMeter(audio);
+      return true;
     } catch {
       setIsPlaying(false);
       setStatus("Tap to play");
       stopWaveMeter();
+      return false;
     }
   }, [fadeAudio, startWaveMeter, stopWaveMeter]);
 
@@ -294,16 +296,53 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   }, []);
 
   useEffect(() => {
-    const handlePauseRequest = () => pauseTrack();
-    const handlePlayRequest = () => void playTrack();
+    let playRequested = false;
+
+    const handlePlayRequest = () => {
+      playRequested = true;
+      void playTrack();
+    };
+
+    const handlePauseRequest = () => {
+      playRequested = false;
+      pauseTrack();
+    };
+
+    // Attempt to play on first user interaction if play was requested but blocked
+    const handleFirstInteraction = async () => {
+      if (playRequested && !isPlaying) {
+        const success = await playTrack();
+        if (success) {
+          removeInteractionListeners();
+        }
+      } else {
+        removeInteractionListeners();
+      }
+    };
+
+    const addInteractionListeners = () => {
+      window.addEventListener("click", handleFirstInteraction);
+      window.addEventListener("keydown", handleFirstInteraction);
+      window.addEventListener("touchstart", handleFirstInteraction);
+    };
+
+    const removeInteractionListeners = () => {
+      window.removeEventListener("click", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
+      window.removeEventListener("touchstart", handleFirstInteraction);
+    };
 
     window.addEventListener("portfolio:pause-music", handlePauseRequest);
     window.addEventListener("portfolio:start-music", handlePlayRequest);
+
+    addInteractionListeners();
+
     return () => {
       window.removeEventListener("portfolio:pause-music", handlePauseRequest);
       window.removeEventListener("portfolio:start-music", handlePlayRequest);
+      removeInteractionListeners();
     };
-  }, [playTrack]);
+  }, [playTrack, isPlaying]);
 
   const playerClassName = [
     "music-player",

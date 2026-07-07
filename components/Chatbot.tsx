@@ -14,7 +14,7 @@ export const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hey! I'm Parmbeer's AI partner. Ask me anything about his video editing services, rates, delivery timelines, or pacing styles! How can I help you today?",
+      content: "Hey! I'm Parmbeer's **AI partner**. Ask me anything about his **video editing services**, **rates**, **delivery timelines**, or **pacing styles**! How can I help you today?",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +33,59 @@ export const Chatbot: React.FC = () => {
       setShowTooltip(false); // hide tooltip forever once opened
     }
   }, [isOpen, messages, isLoading]);
+
+  const parseLinksAndEmails = (text: string) => {
+    const regex = /([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}|https?:\/\/[^\s]+)/g;
+    const parts = text.split(regex);
+    return parts.map((part, idx) => {
+      // Check if it's an email
+      if (part.includes("@") && part.match(/[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/)) {
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(part)}`;
+        return (
+          <a
+            key={idx}
+            href={gmailUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold text-[#c4871f] hover:text-[#a36f18] transition-colors"
+          >
+            {part}
+          </a>
+        );
+      }
+      // Check if it's a link
+      if (part.startsWith("http://") || part.startsWith("https://")) {
+        return (
+          <a
+            key={idx}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold text-[#c4871f] hover:text-[#a36f18] transition-colors"
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
+  const parseMessage = (text: string) => {
+    // Split by bold patterns first
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        const cleanBoldText = part.slice(2, -2);
+        return (
+          <strong key={index} className="font-bold text-[#18181b]">
+            {parseLinksAndEmails(cleanBoldText)}
+          </strong>
+        );
+      }
+      return <React.Fragment key={index}>{parseLinksAndEmails(part)}</React.Fragment>;
+    });
+  };
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +134,7 @@ export const Chatbot: React.FC = () => {
         ...prev,
         {
           role: "assistant",
-          content: `Sorry, I'm having trouble connecting to my AI core (Error: ${errorMessage}). Feel free to reach out directly at parmbeeredits@gmail.com!`,
+          content: "Sorry, I'm having trouble connecting to my AI partner right now. Please feel free to reach out directly at parmbeeredits@gmail.com!",
         },
       ]);
     } finally {
@@ -235,7 +288,7 @@ export const Chatbot: React.FC = () => {
                         : "bg-[#f5f3ee] text-[#3f3f46] rounded-bl-sm border border-[#e5dfd5]"
                     }`}
                   >
-                    {msg.content}
+                    {parseMessage(msg.content)}
                   </div>
                 </div>
               ))}
