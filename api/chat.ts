@@ -78,10 +78,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: "Conversation history too long" });
   }
 
-  const groqApiKey = process.env.GROQ_API_KEY;
+  const groqApiKey = process.env.GROQ_API_KEY || process.env.VITE_GROQ_API_KEY;
   if (!groqApiKey) {
     console.error("Missing GROQ_API_KEY environment variable");
-    return res.status(500).json({ error: "Server configuration error" });
+    return res.status(500).json({ 
+      error: "Missing GROQ_API_KEY environment variable. Please set it in Vercel project settings.", 
+      debug: { envKeys: Object.keys(process.env).filter(k => k.includes("GROQ") || k.includes("KEY")) }
+    });
   }
 
   try {
@@ -93,6 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       })),
     ];
 
+    console.log("Sending request to Groq API using key prefix:", groqApiKey.substring(0, 6));
     const response = await fetch(GROQ_API_URL, {
       method: "POST",
       headers: {
@@ -110,7 +114,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Groq API error response:", errorText);
-      return res.status(502).json({ error: "Bad gateway: failed to retrieve response from AI service." });
+      return res.status(502).json({ 
+        error: `Bad gateway: failed to retrieve response from AI service. Status: ${response.status} ${response.statusText}`, 
+        details: errorText 
+      });
     }
 
     const data = await response.json();
@@ -124,6 +131,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error("Chat completion handler error:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ 
+      error: "Internal server error: " + (error instanceof Error ? error.message : String(error)) 
+    });
   }
 }

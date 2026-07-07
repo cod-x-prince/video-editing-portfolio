@@ -34,3 +34,4 @@ safe-archive/legacy-docs/full-project-report-*.md
 
 # Local authoring notes
 PROJECT_CONTEXT_FOR_AI.md
+.env*.local

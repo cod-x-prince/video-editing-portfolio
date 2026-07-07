@@ -53,8 +53,18 @@ export const Chatbot: React.FC = () => {
         body: JSON.stringify({ messages: updatedMessages }),
       });
 
+      let errorMsg = "Failed to get response";
       if (!response.ok) {
-        throw new Error("Failed to get response");
+        try {
+          const errData = await response.json();
+          errorMsg = errData.error || errorMsg;
+        } catch (_) {
+          try {
+            const txt = await response.text();
+            if (txt) errorMsg = txt;
+          } catch (_) {}
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
@@ -64,13 +74,14 @@ export const Chatbot: React.FC = () => {
 
       setMessages((prev) => [...prev, data.message]);
     } catch (err) {
-      console.error(err);
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      console.error("Chatbot API Error:", errorMessage);
       setHasError(true);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, I'm having trouble connecting to my AI core right now. Please feel free to email Parmbeer directly at parmbeeredits@gmail.com!",
+          content: `Sorry, I'm having trouble connecting to my AI core (Error: ${errorMessage}). Feel free to reach out directly at parmbeeredits@gmail.com!`,
         },
       ]);
     } finally {
